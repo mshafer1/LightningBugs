@@ -15,11 +15,12 @@ namespace LightningBugs
         public Game()
         {
             human = new Player(Resource1.carRed);
-            computer = new Player(Resource1.carRed);
-            computer.turn(Direction.down);
+            computer = new Player(Resource1.carBlue);
+
             Controls.Add(human);
             Controls.Add(computer);
             InitializeComponent();
+            computer.turn(Direction.down);
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -33,30 +34,24 @@ namespace LightningBugs
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-
             if (keyData == Keys.Up)
             {
-
                 human.turn(Direction.up);
             }
             else if (keyData == Keys.Down)
             {
-
                 human.turn(Direction.down);
             }
             else if (keyData == Keys.Left)
             {
-
                 human.turn(Direction.left);
             }
             else if (keyData == Keys.Right)
             {
-
                 human.turn(Direction.right);
             }
 
-            human.Refresh();
-
+            
             return true;
         }
 

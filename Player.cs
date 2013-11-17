@@ -13,12 +13,12 @@ namespace LightningBugs
     public partial class Player : GameImage
     {
 
-        public Player(Image gameImage): base(Resource1.carRed)
+        public Player(Image image): base(image)
         {
             InitializeComponent();
             direction = new DrirectionClass();
-            this.Height = gameImage.Height;
-            this.Width = gameImage.Width;
+            this.Height = image.Height;
+            this.Width = image.Width;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
