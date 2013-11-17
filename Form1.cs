@@ -18,8 +18,19 @@ namespace LightningBugs
             //Width = resolution.X;
             //Height = resolution.Y;
             InitializeComponent();
+            //Icon = Resource1.picture2;
+            Rectangle resolution = Screen.PrimaryScreen.Bounds;
+            int height = Screen.PrimaryScreen.Bounds.Height-40;
+            int width = Screen.PrimaryScreen.Bounds.Width;
+            this.WindowState = FormWindowState.Maximized;
+            this.Height = height;
+            this.Width = width;
+            game1.Top = 0;
+            game1.Left = 0;
+            game1.Height = height - 20;
+            game1.Width = width;
+            game1.Top = game1.Left = 0;
             Text = "Lightning Bugs";
-            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -34,10 +45,5 @@ namespace LightningBugs
         {
             game1.movePieces();
         }
-        
-
-       
-
-        
     }
 }

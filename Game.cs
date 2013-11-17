@@ -62,6 +62,8 @@ namespace LightningBugs
 
         public void movePieces()
         {
+            human.move();
+            computer.move();
         }
     }
 }

@@ -17,6 +17,8 @@ namespace LightningBugs
         {
             InitializeComponent();
             direction = new DrirectionClass();
+            this.Height = gameImage.Height;
+            this.Width = gameImage.Width;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)

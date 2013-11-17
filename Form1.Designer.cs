@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GameForm));
             this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.game1 = new LightningBugs.Game();
             this.SuspendLayout();
@@ -39,17 +40,19 @@
             // 
             // game1
             // 
-            this.game1.Location = new System.Drawing.Point(5, 12);
+            this.game1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.game1.Location = new System.Drawing.Point(175, 36);
             this.game1.Name = "game1";
-            this.game1.Size = new System.Drawing.Size(1105, 705);
+            this.game1.Size = new System.Drawing.Size(667, 477);
             this.game1.TabIndex = 0;
             // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1115, 729);
+            this.ClientSize = new System.Drawing.Size(1802, 729);
             this.Controls.Add(this.game1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "GameForm";
