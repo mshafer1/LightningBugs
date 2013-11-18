@@ -83,9 +83,7 @@ namespace LightningBugs
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
             computer.move(computerTrail);
             Controls.Add(computerTrail);
-            
-            
-            
+
             switch (checkForDeath())
             {
                 case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
@@ -118,7 +116,7 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if (image != computer && image.Top + image.Height >= pos.Value &&
+                if (result == 0 && image != computer && image.Top + image.Height >= pos.Value &&
                     pos.Value >= image.Top &&
                     image.Left <= pos.Key
                     && image.Left + image.Width >= pos.Key)
