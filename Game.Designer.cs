@@ -28,7 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            this.moveTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
+            // 
+            // moveTimer
+            // 
+            this.moveTimer.Enabled = true;
+            this.moveTimer.Interval = 500;
+            this.moveTimer.Tick += new System.EventHandler(this.moveTimer_Tick);
             // 
             // Game
             // 
@@ -42,6 +50,8 @@
         }
 
         #endregion
+
+        private System.Windows.Forms.Timer moveTimer;
 
 
     }

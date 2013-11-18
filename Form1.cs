@@ -43,7 +43,7 @@ namespace LightningBugs
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            game1.movePieces();
+           // game1.movePieces();
         }
     }
 }
