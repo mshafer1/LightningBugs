@@ -104,10 +104,13 @@ namespace LightningBugs
 
                 KeyValuePair<int, int> pos = human.getFrontPosition();
 
-                if (image != human && image.Top + image.Height >= pos.Value &&
+                if ((image != human && 
+                    image.Top + image.Height >= pos.Value &&
                     pos.Value >= image.Top &&
-                    image.Left <= pos.Key
-                    && image.Left + image.Width >= pos.Key)
+                    image.Left <= pos.Key && 
+                    image.Left + image.Width >= pos.Key)||
+                    pos.Key >= this.Width || pos.Value >= this.Height ||
+                    pos.Value <= 0 || pos.Key <= 0)
                 {
                     //MessageBox.Show("You lost");
                     result = 1;
