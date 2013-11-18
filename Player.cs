@@ -66,15 +66,15 @@ namespace LightningBugs
         {
             if (this.direction.getDirection() == Direction.up)
             {
-                trail.Top = (int)(this.Top + (float)this.Height / 2 + 0.5);
+                trail.Top = (int)(this.Top + (float)this.Height / 2);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top -= (int)((float)this.Height / 2 + 0.5);
+                this.Top -= (int)((float)this.Height / 2);
             }
             else if (this.direction.getDirection() == Direction.down)
             {
                 trail.Top = (int)(this.Top);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top += (int)((float)this.Height / 2 + 0.5);
+                this.Top += (int)((float)this.Height / 2);
             }
             else if (this.direction.getDirection() == Direction.left)
             {
@@ -82,9 +82,9 @@ namespace LightningBugs
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2 + 0.5);
+                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
                 trail.Left = this.Left + this.Width - trail.Width;
-                this.Left -= (int)((float)this.Width / 2 + 0.5);
+                this.Left -= (int)((float)this.Width / 2);
 
             }
             else if (this.direction.getDirection() == Direction.right)
@@ -93,9 +93,9 @@ namespace LightningBugs
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2 + 0.5);
+                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
                 trail.Left = this.Left;
-                this.Left += (int)((float)this.Width / 2 + 0.5);
+                this.Left += (int)((float)this.Width / 2);
             }
             
         }
