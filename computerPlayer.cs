@@ -12,7 +12,7 @@ namespace LightningBugs
 {
     class computerPlayer : Player
     {
-        computerPlayer(Image image): base(image)
+        public computerPlayer(Image image): base(image)
         {
         }
 

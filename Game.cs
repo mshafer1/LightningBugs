@@ -12,10 +12,12 @@ namespace LightningBugs
 {
     public partial class Game : UserControl
     {
+        private static Player human;
+        private static computerPlayer computer;
         public Game()
         {
             human = new Player(Resource1.carRed);
-            computer = new Player(Resource1.carBlue);
+            computer = new computerPlayer(Resource1.carBlue);
 
             Controls.Add(human);
             Controls.Add(computer);
@@ -30,7 +32,7 @@ namespace LightningBugs
             human.Top = ClientRectangle.Height - human.Height;
         }
 
-        private static Player human, computer;
+
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
@@ -68,55 +70,28 @@ namespace LightningBugs
                 computer.turn(Direction.right);
             }
 
-            
+
             return true;
         }
 
         private void moveTimer_Tick(object sender, EventArgs e)
         {
-            human.move(Resource1.trailRed);
-            GameImage myTrail = new GameImage(Resource1.trailRed);
-            myTrail.Visible = true;
-            if (human.direction.getDirection() == Direction.up)
-            {
-                myTrail.Top = (int)(human.Top + (float)human.Height / 2 + 0.5);
-                myTrail.Left = (int)(human.Left + (float)(human.Width - myTrail.Width) / 2);
-                human.Top -= (int)((float)human.Height / 2 + 0.5);
-            }
-            else if (human.direction.getDirection() == Direction.down)
-            {
-                myTrail.Top = (int)(human.Top);
-                myTrail.Left = (int)(human.Left + (float)(human.Width - myTrail.Width) / 2);
-                human.Top += (int)((float)human.Height / 2 + 0.5);
-            }
-            else if (human.direction.getDirection() == Direction.left)
-            {
-                myTrail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                int temp = myTrail.Width;
-                myTrail.Width = myTrail.Height;
-                myTrail.Height = temp;
-                myTrail.Top = (int)(human.Top + (float)(human.Height - myTrail.Height) / 2 + 0.5);
-                myTrail.Left = human.Left + human.Width - myTrail.Width;
-                human.Left -= (int)((float)human.Width  / 2 + 0.5);
-                
-            }
-            else if (human.direction.getDirection() == Direction.right)
-            {
-                myTrail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                int temp = myTrail.Width;
-                myTrail.Width = myTrail.Height;
-                myTrail.Height = temp;
-                myTrail.Top = (int)(human.Top + (float)(human.Height - myTrail.Height) / 2 + 0.5);
-                myTrail.Left = human.Left;
-                human.Left += (int)((float)human.Width / 2 + 0.5);
-            }
-            Controls.Add(myTrail);
+            GameImage humanTrail = new GameImage(Resource1.trailRed);
+            human.move(humanTrail);
+            Controls.Add(humanTrail);
+
+            GameImage computerTrail = new GameImage(Resource1.trailBlue);
+            computer.move(computerTrail);
+            Controls.Add(computerTrail);
+            
+            
+            
             switch (checkForDeath())
             {
                 case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
                 case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
             }
-            
+
             ///computer.move(Resource1.trailBlue);
         }
 
@@ -124,13 +99,13 @@ namespace LightningBugs
         {
             int result = 0;
 
-            foreach(GameImage image in Controls)
+            foreach (GameImage image in Controls)
             {
-                
-                KeyValuePair<int,int> pos = human.getFrontPosition();
-                
-                if (image != human && image.Top + image.Height >= pos.Value && 
-                    pos.Value >= image.Top && 
+
+                KeyValuePair<int, int> pos = human.getFrontPosition();
+
+                if (image != human && image.Top + image.Height >= pos.Value &&
+                    pos.Value >= image.Top &&
                     image.Left <= pos.Key
                     && image.Left + image.Width >= pos.Key)
                 {
@@ -140,7 +115,10 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if (image.Top + Height < pos.Value && pos.Value < image.Top - Height && image.Left < pos.Key && image.Left + Width < pos.Key)
+                if (image != computer && image.Top + image.Height >= pos.Value &&
+                    pos.Value >= image.Top &&
+                    image.Left <= pos.Key
+                    && image.Left + image.Width >= pos.Key)
                 {
                     if ((result) == 0)
                     {
