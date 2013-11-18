@@ -15,6 +15,11 @@ namespace LightningBugs
 
         public Player(Image image): base(image)
         {
+            if (obstacles == null)
+            {
+                obstacles = new List<GameImage>();
+            }
+            //obstacles.Add(this);
             InitializeComponent();
             direction = new DrirectionClass();
             this.Height = image.Height;
@@ -68,13 +73,13 @@ namespace LightningBugs
             {
                 trail.Top = (int)(this.Top + (float)this.Height / 2 + 0.5);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top -= (int)((float)this.Height / 2 + 0.5);
+                this.Top -= (int)((float)this.Height / 2 );
             }
             else if (this.direction.getDirection() == Direction.down)
             {
                 trail.Top = (int)(this.Top);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top += (int)((float)this.Height / 2 + 0.5);
+                this.Top += (int)((float)this.Height / 2);
             }
             else if (this.direction.getDirection() == Direction.left)
             {
@@ -82,10 +87,9 @@ namespace LightningBugs
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2 + 0.5);
+                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
                 trail.Left = this.Left + this.Width - trail.Width;
-                this.Left -= (int)((float)this.Width / 2 + 0.5);
-
+                this.Left -= (int)((float)this.Width / 2);
             }
             else if (this.direction.getDirection() == Direction.right)
             {
@@ -93,17 +97,14 @@ namespace LightningBugs
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2 + 0.5);
+                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2 );
                 trail.Left = this.Left;
-                this.Left += (int)((float)this.Width / 2 + 0.5);
+                this.Left += (int)((float)this.Width / 2);
             }
-            
+            obstacles.Add(trail);
         }
 
-        public void move(Image image)
-        {
-
-        }
+        static List<GameImage> obstacles;
 
         public KeyValuePair<int, int> getPosition()
         {
@@ -160,6 +161,30 @@ namespace LightningBugs
             return result;
         }
 
+        public bool checkForDeath(int width, int height)
+        {
+            KeyValuePair<int, int> pos = getFrontPosition();
+            foreach (GameImage gi in obstacles)
+            {
+                if (
+                        (
+                            gi.Top + gi.Height > pos.Value &&
+                            gi.Top < pos.Value &&
+                            gi.Left < pos.Key &&
+                            gi.Left + gi.Width > pos.Key
+                        )
+                    ||
+                        (
+                            pos.Key >= width || pos.Value >= height ||
+                            pos.Value <= 0 || pos.Key <= 0
+                        )
+                    )
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         public DrirectionClass direction;
     }
