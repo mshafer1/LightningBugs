@@ -29,7 +29,7 @@ namespace LightningBugs
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = 0;
-            human.Top = /*computer.Top + computer.Height*2;//*/ClientRectangle.Height - human.Height;
+            human.Top = ClientRectangle.Height - human.Height;
         }
 
 
@@ -83,9 +83,10 @@ namespace LightningBugs
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
             computer.move(computerTrail);
             Controls.Add(computerTrail);
-
-            int check = checkForDeath();
-            switch (check)
+            
+            
+            
+            switch (checkForDeath())
             {
                 case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
                 case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
@@ -97,13 +98,37 @@ namespace LightningBugs
         private int checkForDeath()
         {
             int result = 0;
-            if (human.checkForDeath(this.Width,this.Height))
+
+            foreach (GameImage image in Controls)
             {
-                result = 1;
-            }
-            else if (computer.checkForDeath(this.Width, this.Height))
-            {
-                result = 2;
+
+                KeyValuePair<int, int> pos = human.getFrontPosition();
+
+                if ((image != human && 
+                    image.Top + image.Height >= pos.Value &&
+                    pos.Value >= image.Top &&
+                    image.Left <= pos.Key && 
+                    image.Left + image.Width >= pos.Key)||
+                    pos.Key >= this.Width || pos.Value >= this.Height ||
+                    pos.Value <= 0 || pos.Key <= 0)
+                {
+                    //MessageBox.Show("You lost");
+                    result = 1;
+                }
+
+                pos = computer.getFrontPosition();
+
+                if (image != computer && image.Top + image.Height >= pos.Value &&
+                    pos.Value >= image.Top &&
+                    image.Left <= pos.Key
+                    && image.Left + image.Width >= pos.Key)
+                {
+                    if ((result) == 0)
+                    {
+                        //MessageBox.Show("You WIN");
+                        result = 2;
+                    }
+                }
             }
             return result;
         }
