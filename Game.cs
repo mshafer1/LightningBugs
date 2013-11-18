@@ -51,6 +51,23 @@ namespace LightningBugs
                 human.turn(Direction.right);
             }
 
+            if (keyData == Keys.W)
+            {
+                computer.turn(Direction.up);
+            }
+            else if (keyData == Keys.S)
+            {
+                computer.turn(Direction.down);
+            }
+            else if (keyData == Keys.A)
+            {
+                computer.turn(Direction.left);
+            }
+            else if (keyData == Keys.D)
+            {
+                computer.turn(Direction.right);
+            }
+
             
             return true;
         }

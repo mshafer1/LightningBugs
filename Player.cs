@@ -26,7 +26,7 @@ namespace LightningBugs
 
         }
 
-        public void turn(Direction d)
+        public virtual void turn(Direction d)
         {
             while (direction.CompareTo(d) != 0)
             { int temp = Width;
