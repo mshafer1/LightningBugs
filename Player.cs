@@ -31,18 +31,13 @@ namespace LightningBugs
             while (direction.CompareTo(d) != 0)
             { int temp = Width;
 
-                KeyValuePair<int, int> pos = getTrunkPosition();
+                KeyValuePair<int, int> pos = getPosition();
                 int x = pos.Key;
                 int y = (pos.Value);
                 
                 if (direction.CompareTo(d) < 0)
                 {
-                    Image.RotateFlip(RotateFlipType.Rotate270FlipXY);//turn 90 clockwise
-                    Width = Height;
-                    Height = temp;
-                    KeyValuePair<int, int> posFinal = getTrunkPosition();
-                    Top += pos.Value - posFinal.Value;
-                    Left += posFinal.Key - pos.Key;
+                    Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
                     //if (direction.getDirection() == Direction.down)
                     //{
                     //    x -= Height / 2;
@@ -52,20 +47,18 @@ namespace LightningBugs
                 else
                 {
                     Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                    Width = Height;
-                    Height = temp;
-                    KeyValuePair<int, int> posFinal = getTrunkPosition();
-                    Top += pos.Value - posFinal.Value;
-                    Left -=  posFinal.Key-pos.Key + Width/2;
                     //if (direction.getDirection() == Direction.up)
                     //{
                     //    x += Height / 2;
                     //}
                     direction.increment();
                 }
-               
+                Width = Height;
+                Height = temp;
 
                 //KeyValuePair<int, int> posFinal = getTrunkPosition();
+                Top = y - (Height / 2);
+                Left = x - (Width / 2);
             }
         }
 
@@ -120,22 +113,29 @@ namespace LightningBugs
 
         public KeyValuePair<int, int> getTrunkPosition()
         {
-            KeyValuePair<int, int> result = new KeyValuePair<int, int>();
-            switch (direction.getDirection())
+            int trunkx = Left + Width / 2;
+            int trunky = 0;
+            
+            switch(direction.getDirection())
             {
-                case (Direction.up):
-                    result = new KeyValuePair<int, int>(Left + Width / 2, Top + Height);
+                //case(Direction.left):
+                //    trunkx = Left + Width;
+                //    break;
+                //case(Direction.right):
+                //    trunkx = 
+                //    break;
+                case(Direction.up):
+                    trunky = Top+Height;
+
                     break;
-                case (Direction.down):
-                    result = new KeyValuePair<int, int>(Left + Width / 2, Top);
+                case(Direction.down):
+                    trunky = Top;
                     break;
-                case (Direction.left):
-                    result = new KeyValuePair<int, int>(Left, Top + Height / 2);
-                    break;
-                case (Direction.right):
-                    result = new KeyValuePair<int, int>(Left + Width, Top + Height / 2);
+                default:
+                    trunky = (int)(Top + (float)Height / 2 + .5);
                     break;
             }
+            KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);
             return result;
         }
 
