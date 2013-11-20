@@ -36,6 +36,7 @@ namespace LightningBugs
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            Direction human0 = human.direction.getDirection();
             if (keyData == Keys.Up)
             {
                 human.turn(Direction.up);
@@ -52,7 +53,10 @@ namespace LightningBugs
             {
                 human.turn(Direction.right);
             }
+            
 
+
+            Direction computer0 = computer.direction.getDirection();
             if (keyData == Keys.W)
             {
                 computer.turn(Direction.up);
@@ -68,6 +72,14 @@ namespace LightningBugs
             else if (keyData == Keys.D)
             {
                 computer.turn(Direction.right);
+            }
+            if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0)
+            {
+                switch (checkForDeath())
+                {
+                    case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
+                    case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
+                }
             }
 
 
