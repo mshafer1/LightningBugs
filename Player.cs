@@ -116,9 +116,9 @@ namespace LightningBugs
         public KeyValuePair<int, int> getTrunkPosition()
         {
             int trunkx = Left + Width / 2;
-            int trunky = 0;
-            
-            switch(direction.getDirection())
+            int trunky = Top + Height;
+
+            switch (direction.getDirection())
             {
                 //case(Direction.left):
                 //    trunkx = Left + Width;
@@ -126,15 +126,17 @@ namespace LightningBugs
                 //case(Direction.right):
                 //    trunkx = 
                 //    break;
-                case(Direction.up):
-                    trunky = Top+Height;
-
-                    break;
-                case(Direction.down):
+                case (Direction.up): break;
+                case (Direction.down):
                     trunky = Top;
                     break;
-                default:
-                    trunky = (int)(Top + (float)Height / 2 + .5);
+                case (Direction.left):
+                    trunky = (int)(Top + (float)Height / 2);
+                    trunkx = Left + Width;
+                    break;
+                case (Direction.right):
+                    trunky = (int)(Top + (float)Height / 2);
+                    trunkx = Left;
                     break;
             }
             KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);
