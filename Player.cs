@@ -19,6 +19,7 @@ namespace LightningBugs
             direction = new DrirectionClass();
             this.Height = image.Height;
             this.Width = image.Width;
+            this.length = Height;
         }
 
         private void UserControl1_Load(object sender, EventArgs e)
@@ -64,17 +65,18 @@ namespace LightningBugs
 
         public void move(GameImage trail)
         {
+            float moveLength = this.length/2;
             if (this.direction.getDirection() == Direction.up)
             {
                 trail.Top = (int)(this.Top + (float)this.Height / 2);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top -= (int)((float)this.Height / 2);
+                this.Top -= (int)(moveLength);
             }
             else if (this.direction.getDirection() == Direction.down)
             {
                 trail.Top = (int)(this.Top);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
-                this.Top += (int)((float)this.Height / 2);
+                this.Top += (int)(moveLength);
             }
             else if (this.direction.getDirection() == Direction.left)
             {
@@ -84,7 +86,7 @@ namespace LightningBugs
                 trail.Height = temp;
                 trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
                 trail.Left = this.Left + this.Width - trail.Width;
-                this.Left -= (int)((float)this.Width / 2);
+                this.Left -= (int)(moveLength);
 
             }
             else if (this.direction.getDirection() == Direction.right)
@@ -95,7 +97,7 @@ namespace LightningBugs
                 trail.Height = temp;
                 trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
                 trail.Left = this.Left;
-                this.Left += (int)((float)this.Width / 2);
+                this.Left += (int)(moveLength);
             }
             
         }
@@ -160,7 +162,7 @@ namespace LightningBugs
             return result;
         }
 
-
+        int length;
         public DrirectionClass direction;
     }
 }
