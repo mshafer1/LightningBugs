@@ -35,6 +35,11 @@ namespace LightningBugs
                 KeyValuePair<int, int> pos = getPosition();
                 int x = pos.Key;
                 int y = (pos.Value);
+
+
+                pos = getTrunkPosition();
+                int x0 = pos.Key;
+                int y0 = pos.Value;
                 
                 if (direction.CompareTo(d) < 0)
                 {
@@ -60,6 +65,9 @@ namespace LightningBugs
                 //KeyValuePair<int, int> posFinal = getTrunkPosition();
                 Top = y - (Height / 2);
                 Left = x - (Width / 2);
+
+                Left = x0 - (int)((float)Width / 2+.5);
+                Top = y0 - Height;
             }
         }
 
