@@ -41,24 +41,24 @@ namespace LightningBugs
                 int x0 = pos.Key;
                 int y0 = pos.Value;
                 
-                if (direction.CompareTo(d) < 0)
-                {
-                    Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
+                //if (direction.CompareTo(d) < 0)
+                //{
+                   Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
                     //if (direction.getDirection() == Direction.down)
                     //{
                     //    x -= Height / 2;
                     //}
-                    direction.decrement();
-                }
-                else
-                {
-                    Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                   direction.decrement();
+                //}
+                //else
+                //{
+                    //Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
                     //if (direction.getDirection() == Direction.up)
                     //{
                     //    x += Height / 2;
                     //}
-                    direction.increment();
-                }
+                    //direction.increment();
+                //}
                 Width = Height;
                 Height = temp;
 
@@ -66,48 +66,51 @@ namespace LightningBugs
                 Top = y - (Height / 2);
                 Left = x - (Width / 2);
 
-                Left = x0 - (int)((float)Width / 2+.5);
+                Left = x0 - (int)((float)Width / 2);
                 Top = y0 - Height;
             }
         }
 
         public void move(GameImage trail)
         {
-            float moveLength = this.length/2;
+            int moveLength = this.length/2;
+            
+            trail.Height = moveLength;
             if (this.direction.getDirection() == Direction.up)
             {
-                trail.Top = (int)(this.Top + (float)this.Height / 2);
-                trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
+                trail.Top = (int)(this.Top + Height-moveLength);//Height - moveLength is position from front of car that trail should end before car is moved
+                trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);//by dividing the diference of the widths by two, we get half of the margin to put on one side.
+                
                 this.Top -= (int)(moveLength);
             }
             else if (this.direction.getDirection() == Direction.down)
             {
                 trail.Top = (int)(this.Top);
                 trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
+                
                 this.Top += (int)(moveLength);
             }
-            else if (this.direction.getDirection() == Direction.left)
+            else
             {
-                trail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+                trail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);//orient the trail horizontally.
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
-                trail.Left = this.Left + this.Width - trail.Width;
-                this.Left -= (int)(moveLength);
 
+                trail.Top = (this.Top + (this.Height - trail.Height) / 2);//position trail in center of car vertically.
+                if ((this.direction.getDirection() == Direction.left))
+                {
+                    trail.Left = this.Left + this.Width - moveLength;
+                    
+                    this.Left -= (int)(moveLength);
+                }
+                else
+                {
+                    trail.Left = this.Left;
+                    
+                    this.Left += (int)(moveLength);
+                }
             }
-            else if (this.direction.getDirection() == Direction.right)
-            {
-                trail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                int temp = trail.Width;
-                trail.Width = trail.Height;
-                trail.Height = temp;
-                trail.Top = (int)(this.Top + (float)(this.Height - trail.Height) / 2);
-                trail.Left = this.Left;
-                this.Left += (int)(moveLength);
-            }
-            
         }
 
         public void move(Image image)
@@ -123,23 +126,17 @@ namespace LightningBugs
 
         public KeyValuePair<int, int> getTrunkPosition()
         {
-            int trunkx = Left + Width / 2;
-            int trunky = Top + Height;
+            int trunkx = Left + Width / 2; // assuming up, horizontal center
+            int trunky = Top + Height; //vertical bottom
 
             switch (direction.getDirection())
             {
-                //case(Direction.left):
-                //    trunkx = Left + Width;
-                //    break;
-                //case(Direction.right):
-                //    trunkx = 
-                //    break;
                 case (Direction.up): break;
                 case (Direction.down):
-                    trunky = Top;
+                    trunky = Top; //if headed down; however, move vertical to top
                     break;
                 case (Direction.left):
-                    trunky = (int)(Top + (float)Height / 2);
+                    trunky = (int)(Top + (float)Height / 2); //if moving horizontally, totally redo
                     trunkx = Left + Width;
                     break;
                 case (Direction.right):
@@ -147,8 +144,8 @@ namespace LightningBugs
                     trunkx = Left;
                     break;
             }
-            KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);
-            return result;
+            KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);//create a pair of int using determined x and y
+            return result;//return this pair
         }
 
         public KeyValuePair<int, int> getFrontPosition()

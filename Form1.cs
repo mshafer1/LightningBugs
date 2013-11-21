@@ -14,27 +14,24 @@ namespace LightningBugs
     {
         public GameForm()
         {
-            //Rectangle resolution = System.Windows.Forms.Screen.PrimaryScreen.Bounds;
-            //Width = resolution.X;
-            //Height = resolution.Y;
-            InitializeComponent();
-            //Icon = Resource1.picture2;
-            Rectangle resolution = Screen.PrimaryScreen.Bounds;
-            int height = Screen.PrimaryScreen.Bounds.Height-40;
-            int width = Screen.PrimaryScreen.Bounds.Width;
-            this.WindowState = FormWindowState.Maximized;
-            this.Height = height;
+            InitializeComponent();//call provided constructor
+
+            int height = Screen.PrimaryScreen.Bounds.Height-40;//get the workable height of the screen (-40 for taskbar)
+            int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
+            this.WindowState = FormWindowState.Maximized;//maximize the window
+            this.Height = height;//then set the screen size to exactly what we want
             this.Width = width;
-            game1.Top = 0;
+            game1.Top = 0;//put the game in top left corner
             game1.Left = 0;
-            game1.Height = height - 20;
+            game1.Height = height - 20;//expand to be workable size of program
             game1.Width = width;
             game1.Top = game1.Left = 0;
-            Text = "Lightning Bugs";
+            Text = "Lightning Bugs";//set the display name
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            //testing code
             //Player test = new Player(/*Resource1.carRed*/);
             //Controls.Add(test);
             //test.turn(Direction.down);
@@ -43,7 +40,7 @@ namespace LightningBugs
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-           // game1.movePieces();
+           
         }
     }
 }

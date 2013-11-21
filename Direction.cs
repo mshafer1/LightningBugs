@@ -7,21 +7,21 @@ using System.Threading.Tasks;
 
 namespace LightningBugs
 {
-    public enum Direction
+    public enum Direction//enumerated type for direction
     {
-        right,
-        up,
-        left,
-        down
+        right = 0,
+        up = 1,
+        left = 2,
+        down = 3
     };
-    public class DrirectionClass: IComparable<Direction>
+    public class DrirectionClass : IComparable<Direction>//this class exists to allow increment and decrement to wrap around, and compare use defined way
     {
         Direction direction;
-        public DrirectionClass()
+        public DrirectionClass()//default constructor - since car pictures are up to start
         {
             direction = Direction.up;
         }
-        public Direction getDirection()
+        public Direction getDirection()//return the direction enumeration
         {
             return direction;
         }
@@ -31,7 +31,7 @@ namespace LightningBugs
             {
                 direction++;
             }
-            else
+            else//once at the end of enum, jump back to beginning
             {
                 direction = Direction.right;
             }
@@ -42,21 +42,21 @@ namespace LightningBugs
             {
                 direction--;
             }
-            else
+            else//conversely, jump to back
             {
                 direction = Direction.down;
             }
         }
-        public int CompareTo(Direction p)
+        public int CompareTo(Direction p)//this function is necessary for == or < or > comparisons, it returns 0 for =, -1 for less than, and 1 for greater than
         {
             int result = 0;
-            if (p < direction)
+            if (p != direction)
             {
                 result--;
-            }
-            else if (p > direction)
-            {
-                result++;
+                if (p > direction)
+                {
+                    result+=2;
+                }
             }
             return result;
         }
