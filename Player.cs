@@ -50,75 +50,42 @@ namespace LightningBugs
             //If the direction of the player is not equal to the direction the player wants to move to
             while (direction.getDirection() != d)
             {
-                //Getting actual position of center
+                //Getting actual position of trunk
                 KeyValuePair<int, int> pos = getTrunkPosition();
                 int x = pos.Key;
                 int y = pos.Value;
-
-                //Rotating 90 degrees clockwise
-                
-
-
-                //Adjusting the top and left so player has the same center as before.
-                //Top = y - (Height / 2);
-                //Left = x - (Width / 2);
 
                 switch (direction.getDirection())
                 {
                     // up going right
                     case (Direction.up):
-                        Left = x - divideByFourWithRounding(this.Width);
+                        Left = x - divideByFourWithRounding(this.Width);//division by four makes our trail just a little bettter then division by two.
                         Top = y - divideByFourWithRounding(this.Height);
                         break;
+                    //Down turning left
                     case (Direction.down):
                         Left = x + divideByFourWithRounding(this.Width) - this.Height;
                         Top = y - divideByFourWithRounding(this.Height);
                         break;
+
+                    //left turning up
                     case (Direction.left):
                         Left = x - divideByFourWithRounding(this.Width);
                         Top = y + divideByFourWithRounding(this.Height) - this.Width;
                         break;
+                    //right turning down
                     case (Direction.right):
                         Left = x- divideByFourWithRounding(this.Height);
                         Top = y - divideByFourWithRounding(this.Height);
                         break;
                 }
+
+                //Rotating 90 degrees clockwise
                 Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
                 int temp = this.Width;
                 this.Width = this.Height;
                 this.Height = temp;
-
-
                 direction.decrement();
-                //pos = getTrunkPosition();
-                //int x0 = pos.Key;
-                //int y0 = pos.Value;
-
-                //if (direction.CompareTo(d) < 0)
-                //{
-
-                //if (direction.getDirection() == Direction.down)
-                //{
-                //    x -= Height / 2;
-                //}
-
-                //}
-                //else
-                //{
-                //Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
-                //if (direction.getDirection() == Direction.up)
-                //{
-                //    x += Height / 2;
-                //}
-                //direction.increment();
-                //}
-
-
-                //KeyValuePair<int, int> posFinal = getTrunkPosition();
-
-
-                //Left = x0 - (int)((float)Width / 2);
-                //Top = y0 - Height;
             }
         }
 
