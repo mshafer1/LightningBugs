@@ -18,14 +18,9 @@ namespace LightningBugs
         {
             InitializeComponent();
             direction = new DrirectionClass();
-            this.Height = image.Height;
-            this.Width = image.Width;
+            this.Height = 72;
+            this.Width = 36;
             this.length = Height;
-        }
-
-        private void UserControl1_Load(object sender, EventArgs e)
-        {
-
         }
 
         private int ceil(float input)
@@ -94,6 +89,7 @@ namespace LightningBugs
             int moveLength = this.length / 4;
 
             trail.Height = moveLength;
+            //trail.Width = 2 * moveLength;
             if (this.direction.getDirection() == Direction.up)
             {
                 trail.Top = (int)(this.Top + Height - moveLength);//Height - moveLength is position from front of car that trail should end before car is moved
