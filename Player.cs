@@ -40,7 +40,7 @@ namespace LightningBugs
 
         private int divideByFourWithRounding(int input)
         {
-            int result = (int)((float)((input / 4 + .5)));
+            int result = (int)((float)((input / 4 +.5)));
             return result;
 
         }
@@ -79,8 +79,8 @@ namespace LightningBugs
                         Top = y + divideByFourWithRounding(this.Height) - this.Width;
                         break;
                     case (Direction.right):
-                        Left = x - divideByFourWithRounding(this.Height);
-                        Top = y + divideByFourWithRounding(this.Height) - (this.Width);
+                        Left = x- divideByFourWithRounding(this.Height);
+                        Top = y - divideByFourWithRounding(this.Height);
                         break;
                 }
                 Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
@@ -124,7 +124,7 @@ namespace LightningBugs
 
         public void move(GameImage trail)
         {
-            int moveLength = this.length / 2;
+            int moveLength = this.length / 4;
 
             trail.Height = moveLength;
             if (this.direction.getDirection() == Direction.up)

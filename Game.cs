@@ -73,6 +73,7 @@ namespace LightningBugs
             {
                 computer.turn(Direction.right);
             }
+
             if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0)
             {
                 switch (checkForDeath())
