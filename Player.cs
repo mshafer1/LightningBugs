@@ -35,7 +35,7 @@ namespace LightningBugs
 
         private int divideByTwoWithRounding(int input)
         {
-            int result = (int)((float)((input / 2 +.5)));
+            int result = (int)((float)((input / 2 + .5)));
             return result;
 
         }
@@ -62,29 +62,29 @@ namespace LightningBugs
                 {
                     // up going right
                     case (Direction.up):
-                        Left = x - divideByTwoWithRounding(this.Width);
-                        Top = y - divideByTwoWithRounding(this.Height);
+                        Left += abs(this.Height - Width) - 1;
+                        Top += divideByTwoWithRounding(this.Width);
                         break;
                     //Down turning left
                     case (Direction.down):
-                        Left = x + divideByTwoWithRounding(this.Width) - this.Height;
-                        Top = y - divideByTwoWithRounding(this.Height);
+                        Left -= abs(this.Height - Width) - 1;
+                        Top -= divideByTwoWithRounding(this.Width);
                         break;
 
                     //left turning up
                     case (Direction.left):
-                        Left = x - divideByTwoWithRounding(this.Width);
-                        Top = y + divideByTwoWithRounding(this.Height) - this.Width;
+                        Left += divideByTwoWithRounding(this.Height);
+                        Top -= abs(this.Height - this.Width) - 1;
                         break;
                     //right turning down
                     case (Direction.right):
-                        Left = x - divideByTwoWithRounding(this.Height);
-                        Top = y - divideByTwoWithRounding(this.Height);
+                        Left -= divideByTwoWithRounding(this.Height);
+                        Top += abs(this.Height - this.Width) - 1;
                         break;
                 }
 
-                
-                
+
+
                 direction.decrement();
             }
         }
@@ -191,5 +191,38 @@ namespace LightningBugs
 
         int length;
         public DrirectionClass direction;
+
+        private int abs(int input)
+        {
+            int result = input;
+            if (result < 0)
+            {
+                result *= -1;
+            }
+            return result;
+        }
+
+        public bool overlap(GameImage check)
+        {
+            bool result = false;
+            KeyValuePair<int, int> carFrontPos = getFrontPosition();
+            switch (direction.getDirection())
+            {
+                case (Direction.up):
+                    result = among(carFrontPos.Key, Width/2, check.Left, check.Right);
+                    result &= among(carFrontPos.Value, Height/2,check.Top,check.Bottom);
+                    break;
+            }
+            return result;
+        }
+
+        private bool among(int check, int range, int low, int max)
+        {
+            bool result;
+            int minCheck = check - range;
+            int maxCheck = check + range;
+            result = (low >= minCheck && maxCheck <= max);
+            return result;
+        }
     }
 }

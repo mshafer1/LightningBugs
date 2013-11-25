@@ -80,7 +80,7 @@ namespace LightningBugs
                 computer.turn(Direction.right);
             }
 
-            if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0)
+            if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && false)
             {
                 switch (checkForDeath())
                 {
@@ -122,14 +122,12 @@ namespace LightningBugs
             {
 
                 KeyValuePair<int, int> pos = human.getFrontPosition();
-
-                if ((image != human && 
-                    image.Top + image.Height >= pos.Value &&
-                    pos.Value >= image.Top &&
-                    image.Left <= pos.Key && 
-                    image.Left + image.Width >= pos.Key)||
-                    pos.Key >= this.Width || pos.Value >= this.Height ||
-                    pos.Value <= 0 || pos.Key <= 0)
+                KeyValuePair<int, int> piecePos = image.centerPos();
+                if (image == computer)
+                {
+                    result = 0;//remove later
+                }
+                if (image != human && human.overlap(image))
                 {
                     //MessageBox.Show("You lost");
                     result = 1;
@@ -137,19 +135,24 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if (image != computer && image.Top + image.Height >= pos.Value &&
-                    pos.Value >= image.Top &&
-                    image.Left <= pos.Key
-                    && image.Left + image.Width >= pos.Key)
+                if ( result == 0 &&
+                    (image != computer &&
+                    (computer.Left < piecePos.Key && computer.Left + computer.Width / 2 > piecePos.Key)
+                    && (computer.Top < piecePos.Value && computer.Top + computer.Height > piecePos.Value))
+                    ||
+                    pos.Key >= this.Width || pos.Value >= this.Height ||
+                    pos.Value <= 0 || pos.Key <= 0)
                 {
                     if ((result) == 0)
                     {
                         //MessageBox.Show("You WIN");
-                        result = 2;
+                        //result = 2;
                     }
                 }
             }
             return result;
         }
+
+        
     }
 }

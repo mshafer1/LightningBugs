@@ -23,9 +23,10 @@ namespace LightningBugs
             TabStop = false;
         }
 
-        private void GameImage_Load(object sender, EventArgs e)
+        public KeyValuePair<int, int> centerPos()
         {
-
+            KeyValuePair<int, int> result = new KeyValuePair<int, int>(Left + Width / 2, Top + Height / 2);
+            return result;
         }
     }
 }

@@ -34,7 +34,7 @@
             // 
             // moveTimer
             // 
-            this.moveTimer.Interval = 250;
+            this.moveTimer.Interval = 125;
             this.moveTimer.Tick += new System.EventHandler(this.moveTimer_Tick);
             // 
             // Game
