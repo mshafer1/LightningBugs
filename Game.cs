@@ -36,6 +36,12 @@ namespace LightningBugs
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
+            //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
+            if (moveTimer.Enabled == false)
+            {
+                moveTimer.Enabled = true;
+            }
+
             Direction human0 = human.direction.getDirection();
             if (keyData == Keys.Up)
             {

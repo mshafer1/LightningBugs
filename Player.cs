@@ -33,9 +33,9 @@ namespace LightningBugs
             return result;
         }
 
-        private int divideByFourWithRounding(int input)
+        private int divideByTwoWithRounding(int input)
         {
-            int result = (int)((float)((input / 4 +.5)));
+            int result = (int)((float)((input / 2 +.5)));
             return result;
 
         }
@@ -46,50 +46,55 @@ namespace LightningBugs
             while (direction.getDirection() != d)
             {
                 //Getting actual position of trunk
-                KeyValuePair<int, int> pos = getTrunkPosition();
+                KeyValuePair<int, int> pos = getPosition();
                 int x = pos.Key;
                 int y = pos.Value;
-
-                switch (direction.getDirection())
-                {
-                    // up going right
-                    case (Direction.up):
-                        Left = x - divideByFourWithRounding(this.Width);//division by four makes our trail just a little bettter then division by two.
-                        Top = y - divideByFourWithRounding(this.Height);
-                        break;
-                    //Down turning left
-                    case (Direction.down):
-                        Left = x + divideByFourWithRounding(this.Width) - this.Height;
-                        Top = y - divideByFourWithRounding(this.Height);
-                        break;
-
-                    //left turning up
-                    case (Direction.left):
-                        Left = x - divideByFourWithRounding(this.Width);
-                        Top = y + divideByFourWithRounding(this.Height) - this.Width;
-                        break;
-                    //right turning down
-                    case (Direction.right):
-                        Left = x- divideByFourWithRounding(this.Height);
-                        Top = y - divideByFourWithRounding(this.Height);
-                        break;
-                }
 
                 //Rotating 90 degrees clockwise
                 Image.RotateFlip(RotateFlipType.Rotate270FlipXY);
                 int temp = this.Width;
                 this.Width = this.Height;
                 this.Height = temp;
+                Top = y - Height / 2;
+                Left = x - Width / 2;
+
+                switch (direction.getDirection())
+                {
+                    // up going right
+                    case (Direction.up):
+                        Left = x - divideByTwoWithRounding(this.Width);
+                        Top = y - divideByTwoWithRounding(this.Height);
+                        break;
+                    //Down turning left
+                    case (Direction.down):
+                        Left = x + divideByTwoWithRounding(this.Width) - this.Height;
+                        Top = y - divideByTwoWithRounding(this.Height);
+                        break;
+
+                    //left turning up
+                    case (Direction.left):
+                        Left = x - divideByTwoWithRounding(this.Width);
+                        Top = y + divideByTwoWithRounding(this.Height) - this.Width;
+                        break;
+                    //right turning down
+                    case (Direction.right):
+                        Left = x - divideByTwoWithRounding(this.Height);
+                        Top = y - divideByTwoWithRounding(this.Height);
+                        break;
+                }
+
+                
+                
                 direction.decrement();
             }
         }
 
         public void move(GameImage trail)
         {
-            int moveLength = this.length / 4;
+            int moveLength = 4;
 
             trail.Height = moveLength;
-            //trail.Width = 2 * moveLength;
+            trail.Width = 4;
             if (this.direction.getDirection() == Direction.up)
             {
                 trail.Top = (int)(this.Top + Height - moveLength);//Height - moveLength is position from front of car that trail should end before car is moved
