@@ -12,7 +12,9 @@ namespace LightningBugs
 {
     public partial class Player : GameImage
     {
-
+        protected int length;
+        int width;
+        public DrirectionClass direction;
         public Player(Image image)
             : base(image)
         {
@@ -190,9 +192,7 @@ namespace LightningBugs
             return result;
         }
 
-        int length;
-        int width;
-        public DrirectionClass direction;
+        
 
         private int abs(int input)
         {

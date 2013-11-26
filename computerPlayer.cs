@@ -12,7 +12,8 @@ namespace LightningBugs
 {
     class computerPlayer : Player
     {
-        public computerPlayer(Image image): base(image)
+        public computerPlayer(Image image)
+            : base(image)
         {
         }
 
@@ -55,24 +56,85 @@ namespace LightningBugs
 
         public void turn(ControlCollection Controls)
         {
-            KeyValuePair<int, int> pos = getPosition();
-            Random rand = new Random();
-            switch (rand.Next()%100)
-            {
-                case (0):
-                    turn(Direction.up);
-                    break;
-                case (1):
-                    turn(Direction.left);
-                    break;
-                case (2):
-                    turn(Direction.down);
-                    break;
-                case (3):
-                    turn(Direction.right);
-                    break;
-            }
+            //KeyValuePair<int, int> pos = getPosition();
+            List<Direction> options = new List<Direction>();
+            Direction temp = direction.getDirection();
             
+            //checkControls.Remove(this);
+            //exam going up
+            options.Add(Direction.up);//add all possible directions to be removed as they become not options
+            options.Add(Direction.down);
+            options.Add(Direction.left);
+            options.Add(Direction.right);
+
+            //Controls.Remove(this);//remove self from list to check against.
+            turn(Direction.up);
+            foreach (GameImage image in Controls)
+            {
+                if (image != this && (overlap(image) || Top <= 2))
+                {
+                    options.Remove(Direction.up);
+                }
+            }
+            turn(Direction.down);
+            foreach (GameImage image in Controls)
+            {
+                if (image != this && (overlap(image) || Bottom >= Screen.PrimaryScreen.Bounds.Height - 60))
+                {
+                    options.Remove(Direction.down);
+                }
+            }
+            turn(Direction.left);
+            foreach (GameImage image in Controls)
+            {
+                if (image != this && (overlap(image) || Left < 0 || Top <= 0))
+                {
+                    options.Remove(Direction.left);
+                }
+            }
+            turn(Direction.right);
+            foreach (GameImage image in Controls)
+            {
+                if (image != this && (overlap(image) || Top <= 0 /*|| Right > Screen.PrimaryScreen.Bounds.Width*/))
+                {
+                    options.Remove(Direction.right);
+                }
+            }
+            Random randomChoice = new Random();
+            turn(temp);//return orientation to original
+
+            //check to see if can continue in current direction
+            move(new GameImage(Resource1.carBlue));
+            bool canContinue = true;
+            foreach (GameImage image in Controls)
+            {
+                if (image != this && overlap(image))
+                {
+                    canContinue = false;
+                }
+            }
+            if (canContinue)
+            {
+                int optionCount = options.Count;
+                optionCount *= optionCount;
+                for (int i = 0; i < optionCount; i++)
+                {
+                    options.Add(direction.getDirection());
+                }
+            }
+
+            //move back to original pos by reversing direction, moving, and reversing again.
+            direction.increment();
+            direction.increment();
+            move(new GameImage(Resource1.carBlue));
+            direction.increment();
+            direction.increment();
+
+            if (options.Count > 0)
+            {
+                turn(options.ElementAt(randomChoice.Next() % options.Count()));
+            }
+            //Controls.Add(this);
         }
     }
 }

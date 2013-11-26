@@ -14,6 +14,7 @@ namespace LightningBugs
     {
         private static Player human;
         private static computerPlayer computer;
+        private static int moveCount;
         public Game()
         {
             human = new Player(Resource1.carRed);
@@ -23,13 +24,17 @@ namespace LightningBugs
             Controls.Add(computer);
             InitializeComponent();
             computer.turn(Direction.down);
+            //computer.turn(Direction.left);//remove later
+            
         }
 
         private void Game_Load(object sender, EventArgs e)
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = 0;
+            //computer.Top = 72;//remove later
             human.Top = ClientRectangle.Height - human.Height;
+            moveCount = 0;
         }
 
 
@@ -95,13 +100,18 @@ namespace LightningBugs
 
         private void moveTimer_Tick(object sender, EventArgs e)
         {
+            moveCount++;
+            
             GameImage humanTrail = new GameImage(Resource1.trailRed);
             human.move(humanTrail);
             Controls.Add(humanTrail);
 
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
             computer.move(computerTrail);
-            computer.turn(Controls);
+            //if (moveCount % 3 == 0)
+            {
+                computer.turn(Controls);
+            }
             Controls.Add(computerTrail);
             
             
@@ -125,7 +135,7 @@ namespace LightningBugs
                 KeyValuePair<int, int> pos = human.getFrontPosition();
                 KeyValuePair<int, int> piecePos = image.centerPos();
                 
-                if (image != human && human.overlap(image))
+                if (image != human && human.overlap(image) || (human.Top < 0 || human.Left < 0 || human.Bottom > this.Height || human.Right > this.Width))
                 {
                     //MessageBox.Show("You lost");
                     result = 1;
@@ -133,7 +143,7 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if (image != computer && computer.overlap(image))
+                if (image != computer && computer.overlap(image) || (computer.Top < 0 || computer.Left < 0 || computer.Bottom > this.Height || computer.Right > this.Width))
                 {
                     //MessageBox.Show("You lost");
                     result = 2;
