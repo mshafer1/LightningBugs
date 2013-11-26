@@ -52,5 +52,27 @@ namespace LightningBugs
         //        Left = x - (Width / 2);
         //    }
         //}
+
+        public void turn(ControlCollection Controls)
+        {
+            KeyValuePair<int, int> pos = getPosition();
+            Random rand = new Random();
+            switch (rand.Next()%100)
+            {
+                case (0):
+                    turn(Direction.up);
+                    break;
+                case (1):
+                    turn(Direction.left);
+                    break;
+                case (2):
+                    turn(Direction.down);
+                    break;
+                case (3):
+                    turn(Direction.right);
+                    break;
+            }
+            
+        }
     }
 }

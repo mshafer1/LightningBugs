@@ -101,6 +101,7 @@ namespace LightningBugs
 
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
             computer.move(computerTrail);
+            computer.turn(Controls);
             Controls.Add(computerTrail);
             
             
