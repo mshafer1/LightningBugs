@@ -21,6 +21,7 @@ namespace LightningBugs
             this.Height = 72;
             this.Width = 36;
             this.length = Height;
+            this.width = Width;
         }
 
         private int ceil(float input)
@@ -91,7 +92,7 @@ namespace LightningBugs
 
         public void move(GameImage trail)
         {
-            int moveLength = 4;
+            int moveLength = 5;
 
             trail.Height = moveLength;
             trail.Width = 4;
@@ -190,6 +191,7 @@ namespace LightningBugs
         }
 
         int length;
+        int width;
         public DrirectionClass direction;
 
         private int abs(int input)
@@ -206,22 +208,14 @@ namespace LightningBugs
         {
             bool result = false;
             KeyValuePair<int, int> carFrontPos = getFrontPosition();
-            switch (direction.getDirection())
+            int threshold =  Width / 4 - 1;
+            if(check.Left < Right-threshold && check.Right > Left+threshold)
             {
-                case (Direction.up):
-                    result = among(carFrontPos.Key, Width/2, check.Left, check.Right);
-                    result &= among(carFrontPos.Value, Height/2,check.Top,check.Bottom);
-                    break;
+                if (check.Top < Bottom-threshold && check.Bottom > Top+threshold)
+                {
+                    result = true;
+                }
             }
-            return result;
-        }
-
-        private bool among(int check, int range, int low, int max)
-        {
-            bool result;
-            int minCheck = check - range;
-            int maxCheck = check + range;
-            result = (low >= minCheck && maxCheck <= max);
             return result;
         }
     }

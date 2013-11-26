@@ -111,7 +111,7 @@ namespace LightningBugs
                 case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
             }
 
-            ///computer.move(Resource1.trailBlue);
+            
         }
 
         private int checkForDeath()
@@ -123,10 +123,7 @@ namespace LightningBugs
 
                 KeyValuePair<int, int> pos = human.getFrontPosition();
                 KeyValuePair<int, int> piecePos = image.centerPos();
-                if (image == computer)
-                {
-                    result = 0;//remove later
-                }
+                
                 if (image != human && human.overlap(image))
                 {
                     //MessageBox.Show("You lost");
@@ -135,19 +132,10 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if ( result == 0 &&
-                    (image != computer &&
-                    (computer.Left < piecePos.Key && computer.Left + computer.Width / 2 > piecePos.Key)
-                    && (computer.Top < piecePos.Value && computer.Top + computer.Height > piecePos.Value))
-                    ||
-                    pos.Key >= this.Width || pos.Value >= this.Height ||
-                    pos.Value <= 0 || pos.Key <= 0)
+                if (image != computer && computer.overlap(image))
                 {
-                    if ((result) == 0)
-                    {
-                        //MessageBox.Show("You WIN");
-                        //result = 2;
-                    }
+                    //MessageBox.Show("You lost");
+                    result = 2;
                 }
             }
             return result;
