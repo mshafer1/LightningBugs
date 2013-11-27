@@ -106,6 +106,12 @@ namespace LightningBugs
             human.move(humanTrail);
             Controls.Add(humanTrail);
 
+            switch (checkForDeath())
+            {
+                case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
+                case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
+            }
+
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
             computer.move(computerTrail);
             //if (moveCount % 3 == 0)
@@ -135,7 +141,7 @@ namespace LightningBugs
                 KeyValuePair<int, int> pos = human.getFrontPosition();
                 KeyValuePair<int, int> piecePos = image.centerPos();
                 
-                if (image != human && human.overlap(image) || (human.Top < 0 || human.Left < 0 || human.Bottom > this.Height || human.Right > this.Width))
+                if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height+20 || human.Right >= this.Width+20))
                 {
                     //MessageBox.Show("You lost");
                     result = 1;
@@ -143,7 +149,7 @@ namespace LightningBugs
 
                 pos = computer.getFrontPosition();
 
-                if (image != computer && computer.overlap(image) || (computer.Top < 0 || computer.Left < 0 || computer.Bottom > this.Height || computer.Right > this.Width))
+                if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height+20 || computer.Right > this.Width+20))
                 {
                     //MessageBox.Show("You lost");
                     result = 2;
