@@ -35,6 +35,7 @@ namespace LightningBugs
             //computer.Top = 72;//remove later
             human.Top = ClientRectangle.Height - human.Height;
             moveCount = 0;
+
         }
 
 
@@ -113,11 +114,12 @@ namespace LightningBugs
             }
 
             GameImage computerTrail = new GameImage(Resource1.trailBlue);
-            computer.move(computerTrail);
-            //if (moveCount % 3 == 0)
+
+            if (Class1.vComputer)
             {
                 computer.turn(Controls);
             }
+            computer.move(computerTrail);
             Controls.Add(computerTrail);
             
             

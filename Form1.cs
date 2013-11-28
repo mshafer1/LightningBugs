@@ -21,7 +21,7 @@ namespace LightningBugs
             this.WindowState = FormWindowState.Maximized;//maximize the window
             this.Height = height;//then set the screen size to exactly what we want
             this.Width = width;
-            game1.Top = 0;//put the game in top left corner
+            game1.Top = 10;//put the game in top left corner
             game1.Left = 0;
             game1.Height = height - 20;//expand to be workable size of program
             game1.Width = width;
@@ -36,6 +36,11 @@ namespace LightningBugs
             //Controls.Add(test);
             //test.turn(Direction.down);
             //test.BringToFront();
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            Class1.vComputer = checkBox1.Checked;
         }
 
         
