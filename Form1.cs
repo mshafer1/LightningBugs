@@ -41,6 +41,7 @@ namespace LightningBugs
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
             Class1.vComputer = checkBox1.Checked;
+            game1.Focus();
         }
 
         
