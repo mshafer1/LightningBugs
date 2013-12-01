@@ -40,6 +40,7 @@ namespace LightningBugs
         {
             int result = (int)((float)((input / 2 + .5)));
             return result;
+            
 
         }
 
@@ -135,11 +136,6 @@ namespace LightningBugs
             }
         }
 
-        public void move(Image image)
-        {
-
-        }
-
         public KeyValuePair<int, int> getPosition()
         {
             KeyValuePair<int, int> result = new KeyValuePair<int, int>(Left + (Width / 2), Top + (Height / 2));
@@ -191,8 +187,6 @@ namespace LightningBugs
             }
             return result;
         }
-
-        
 
         private int abs(int input)
         {

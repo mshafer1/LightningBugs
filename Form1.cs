@@ -12,6 +12,10 @@ namespace LightningBugs
 {
     public partial class GameForm : Form
     {
+        //public static bool startButton;
+        //public static bool pauseButton;
+        //public static bool newGameButton;
+        
         public GameForm()
         {
             InitializeComponent();//call provided constructor
@@ -26,11 +30,25 @@ namespace LightningBugs
             game1.Height = height - 20;//expand to be workable size of program
             game1.Width = width;
             game1.Top = game1.Left = 0;
+            button1.Top = height - 17;
+            button1.Left = width / 2;
+            //button2.Visible = true;
+            radioButton1.Top = height - 19;
+            radioButton1.Left = width / 2 - 90;
+            radioButton2.Top = height - 4;
+            radioButton2.Left = width / 2 - 90;
+            //Playing against the computer is the default
+            Class1.vComputer = true;
             Text = "Lightning Bugs";//set the display name
         }
-
+        
         private void Form1_Load(object sender, EventArgs e)
         {
+            //This is made so the user can start the game by pressing Enter
+            button1.Focus();
+            
+
+
             //testing code
             //Player test = new Player(/*Resource1.carRed*/);
             //Controls.Add(test);
@@ -38,12 +56,27 @@ namespace LightningBugs
             //test.BringToFront();
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
         {
-            Class1.vComputer = checkBox1.Checked;
+            Class1.vComputer = true;
             game1.Focus();
         }
 
-        
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            Class1.vComputer = false;
+            game1.Focus();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Class1.startClick = true;
+            game1.Focus();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
