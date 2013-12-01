@@ -43,7 +43,6 @@ namespace LightningBugs
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = (int)computer.Width*2;
-            //computer.Top = 72;//remove later
             human.Top = ClientRectangle.Height - human.Height - (int)human.Width*2;
             moveCount = 0;
         }
