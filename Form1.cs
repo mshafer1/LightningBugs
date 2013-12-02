@@ -10,83 +10,72 @@ using System.Windows.Forms;
 
 namespace LightningBugs
 {
-    public partial class GameForm : Form
+    public partial class Form1 : Form
     {
-        //public static bool startButton;
-        //public static bool pauseButton;
-        //public static bool newGameButton;
-        
-        public GameForm()
+        Game game1;
+        public Form1()
         {
-            InitializeComponent();//call provided constructor
+            InitializeComponent();
 
-            int height = Screen.PrimaryScreen.Bounds.Height-40;//get the workable height of the screen (-40 for taskbar)
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            lblLevel.Visible = false;
+            lblMode.Visible = false;
+            btnToggle.Visible = false;
+
+            newGameScreen1.StartGameTime += startGame;
+            newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
+
+            newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
+            //Playing against the computer is the default
+            Text = "Lightning Bugs";//set the display name
+
+            newGameScreen1.Visible = true;
+            
+        }
+
+        private void startGame(object sender, EventArgs e)
+        {
+            newGameScreen1.Visible = false;
+            int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
             int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
             this.WindowState = FormWindowState.Maximized;//maximize the window
             this.Height = height;//then set the screen size to exactly what we want
             this.Width = width;
+
+            lblLevel.Visible = true;
+            lblMode.Visible = true;
+            btnToggle.Visible = true;
+
+            lblLevel.Left = 10;
+            lblMode.Left = width - 10 - lblMode.Width;
+            btnToggle.Left = (width - btnToggle.Width) / 2;
+
+            lblLevel.Top = Height-100;
+            lblMode.Top = Height - 100;
+            btnToggle.Top = Height - 100;
+
+            lblLevel.Text = newGameScreen1.comboBox1.SelectedItem.ToString();
+
+
+
+
+            game1 = new Game(newGameScreen1.radioButton1.Checked);
             game1.Top = 10;//put the game in top left corner
             game1.Left = 0;
-            game1.Height = height - 20;//expand to be workable size of program
+            game1.Height = height - 60;//expand to be workable size of program
             game1.Width = width;
             game1.Top = game1.Left = 0;
-            button1.Top = height - 17;
-            button1.Left = width / 2;
-            //button2.Visible = true;
-            radioButton1.Top = height - 19;
-            radioButton1.Left = width / 2 - 90;
-            radioButton2.Top = height - 4;
-            radioButton2.Left = width / 2 - 90;
-            //Playing against the computer is the default
-            Class1.vComputer = true;
+           
+
             Text = "Lightning Bugs";//set the display name
+
+            Controls.Add(game1);
+            game1.Visible = true;
         }
+
         
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            //This is made so the user can start the game by pressing Enter
-            button1.Focus();
-            
-
-
-            //testing code
-            //Player test = new Player(/*Resource1.carRed*/);
-            //Controls.Add(test);
-            //test.turn(Direction.down);
-            //test.BringToFront();
-        }
-
-        private void radioButton1_CheckedChanged(object sender, EventArgs e)
-        {
-            Class1.vComputer = true;
-            game1.Focus();
-        }
-
-        private void radioButton2_CheckedChanged(object sender, EventArgs e)
-        {
-            Class1.vComputer = false;
-            game1.Focus();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            Class1.startClick = true;
-            game1.Focus();
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button1_MouseEnter(object sender, EventArgs e)
-        {
-            BackColor = Color.Green;
-        }
-
-        private void button1_MouseLeave(object sender, EventArgs e)
-        {
-            BackColor = Color.Gray;
-        }
     }
 }

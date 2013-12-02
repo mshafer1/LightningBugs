@@ -17,8 +17,31 @@ namespace LightningBugs
         private static computerPlayer computer;
         private static int moveCount;
         private static bool gameOver = false;
+        public bool vComputer;
 
-        public Game()
+        //public Game(bool option)
+        //{
+        //    human = new Player(Resource1.carRed);
+        //    computer = new computerPlayer(Resource1.carBlue);
+        //    Controls.Add(human);
+        //    Controls.Add(computer);
+        //    InitializeComponent();
+        //    computer.turn(Direction.down);
+        //    vComputer = option;
+        //    //computer.turn(Direction.left);//remove later
+        //    //int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
+        //    //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
+        //    //button2.Visible = true;
+        //    //button2.Top = height - 10;
+        //    //button2.Left = width / 2;
+        //    //button3.Top = height - 17;
+        //    //button3.Left = width / 2;
+        //    //GameForm.startButton = true;
+            
+                        
+        //}
+
+        public Game(bool option)
         {
             human = new Player(Resource1.carRed);
             computer = new computerPlayer(Resource1.carBlue);
@@ -26,6 +49,7 @@ namespace LightningBugs
             Controls.Add(computer);
             InitializeComponent();
             computer.turn(Direction.down);
+            vComputer = option;
             //computer.turn(Direction.left);//remove later
             //int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
             //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
@@ -35,8 +59,8 @@ namespace LightningBugs
             //button3.Top = height - 17;
             //button3.Left = width / 2;
             //GameForm.startButton = true;
-            
-                        
+
+
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -50,24 +74,20 @@ namespace LightningBugs
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
             //The game can start by pressing space
-            if (keyData == Keys.Space && Class1.startClick != true)
-            {
-                Class1.startClick = true;
-            }
-            
-            if (Class1.startClick && !gameOver)
+
+            if (!gameOver)
             {
                 //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
-                if (moveTimer.Enabled == false)
-                {
-                    moveTimer.Enabled = true;
+                //if (moveTimer.Enabled == false)
+                //{
+                //    moveTimer.Enabled = true;
 
 
                     //Trying to implement the switch from START to PAUSE button
                     //Class1 temp = new Class1();
                     //temp.pauseButtonVisible = true;
                     
-                }
+                //}
                
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
@@ -86,31 +106,35 @@ namespace LightningBugs
                 {
                     human.turn(Direction.right);
                 }
-                
-                Direction computer0 = computer.direction.getDirection();
-                if (keyData == Keys.W)
-                {
-                    computer.turn(Direction.up);
-                }
-                else if (keyData == Keys.S)
-                {
-                    computer.turn(Direction.down);
-                }
-                else if (keyData == Keys.A)
-                {
-                    computer.turn(Direction.left);
-                }
-                else if (keyData == Keys.D)
-                {
-                    computer.turn(Direction.right);
-                }
 
-                if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && false)
+                if (!vComputer)
                 {
-                    switch (checkForDeath())
+                    Direction computer0 = computer.direction.getDirection();
+                    if (keyData == Keys.W)
                     {
-                        case (1): moveTimer.Enabled = false; gameOver = true; Class1.startClick = false; MessageBox.Show("You lost"); break;
-                        case (2): moveTimer.Enabled = false; gameOver = true; Class1.startClick = false; MessageBox.Show("You WIN"); break;
+                        computer.turn(Direction.up);
+                    }
+                    else if (keyData == Keys.S)
+                    {
+                        computer.turn(Direction.down);
+                    }
+                    else if (keyData == Keys.A)
+                    {
+                        computer.turn(Direction.left);
+                    }
+                    else if (keyData == Keys.D)
+                    {
+                        computer.turn(Direction.right);
+                    }
+
+                    if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && !gameOver)
+                    {
+
+                        switch (checkForDeath())
+                        {
+                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
+                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                        }
                     }
                 }
             }
@@ -120,7 +144,7 @@ namespace LightningBugs
 
         private void moveTimer_Tick(object sender, EventArgs e)
         {
-            if (Class1.startClick && !gameOver)
+            if (!gameOver)
             {
                 moveCount++;
                
@@ -128,15 +152,18 @@ namespace LightningBugs
                 human.move(humanTrail);
                 Controls.Add(humanTrail);
 
-                switch (checkForDeath())
-                {
-                    case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
-                    case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
-                }
+                //if (!gameOver)
+                //{
+                //    switch (checkForDeath())
+                //    {
+                //        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
+                //        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                //    }
+                //}
 
                 GameImage computerTrail = new GameImage(Resource1.trailBlue);
 
-                if (Class1.vComputer)
+                if (vComputer)
                 {
                     computer.turn(Controls);
                 }
@@ -144,11 +171,13 @@ namespace LightningBugs
                 Controls.Add(computerTrail);
 
 
-
-                switch (checkForDeath())
+                if (!gameOver)
                 {
-                    case (1): moveTimer.Enabled = false; MessageBox.Show("You lost"); break;
-                    case (2): moveTimer.Enabled = false; MessageBox.Show("You WIN"); break;
+                    switch (checkForDeath())
+                    {
+                        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
+                        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                    }
                 }
             }
         }

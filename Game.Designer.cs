@@ -34,6 +34,7 @@
             // 
             // moveTimer
             // 
+            this.moveTimer.Enabled = true;
             this.moveTimer.Interval = 50;
             this.moveTimer.Tick += new System.EventHandler(this.moveTimer_Tick);
             // 
@@ -41,9 +42,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Name = "Game";
-            this.Size = new System.Drawing.Size(861, 590);
+            this.Size = new System.Drawing.Size(863, 592);
             this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);
 

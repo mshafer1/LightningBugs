@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace LightningBugs
 {
-    public class Class1 : GameForm
+    public class Class1 : Form1
     {
         public static bool vComputer;
         public static bool startClick;
