@@ -78,5 +78,15 @@ namespace LightningBugs
         {
 
         }
+
+        private void button1_MouseEnter(object sender, EventArgs e)
+        {
+            BackColor = Color.Green;
+        }
+
+        private void button1_MouseLeave(object sender, EventArgs e)
+        {
+            BackColor = Color.Gray;
+        }
     }
 }
