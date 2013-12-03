@@ -64,26 +64,28 @@
             // 
             // newGameScreen1
             // 
-            this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.newGameScreen1.Location = new System.Drawing.Point(12, 12);
+            this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.newGameScreen1.Location = new System.Drawing.Point(0, 0);
             this.newGameScreen1.Name = "newGameScreen1";
-            this.newGameScreen1.Size = new System.Drawing.Size(352, 211);
+            this.newGameScreen1.Size = new System.Drawing.Size(305, 301);
             this.newGameScreen1.Start = false;
-            this.newGameScreen1.TabIndex = 0;
+            this.newGameScreen1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(399, 265);
+            this.ClientSize = new System.Drawing.Size(299, 295);
+            this.Controls.Add(this.newGameScreen1);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblMode);
             this.Controls.Add(this.btnToggle);
-            this.Controls.Add(this.newGameScreen1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form1";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
@@ -93,9 +95,9 @@
 
         #endregion
 
-        private NewGameScreen newGameScreen1;
         private System.Windows.Forms.Button btnToggle;
         private System.Windows.Forms.Label lblMode;
         private System.Windows.Forms.Label lblLevel;
+        private NewGameScreen newGameScreen1;
     }
 }

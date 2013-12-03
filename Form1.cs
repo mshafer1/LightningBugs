@@ -26,9 +26,9 @@ namespace LightningBugs
             btnToggle.Visible = false;
 
             newGameScreen1.StartGameTime += startGame;
-            newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
+            //newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
 
-            newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
+            //newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
             //Playing against the computer is the default
             Text = "Lightning Bugs";//set the display name
 

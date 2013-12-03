@@ -29,7 +29,6 @@ namespace LightningBugs
         private void btnStart_Click(object sender, EventArgs e)
         {
             start = true;
-
             OnStartGameEvent(e);
         }
 
