@@ -12,36 +12,14 @@ namespace LightningBugs
 {
     public partial class Game : UserControl
     {
-        
+
         private static Player human;
         private static computerPlayer computer;
         private static int moveCount;
         private static bool gameOver = false;
-        public bool vComputer;
+        private bool vComputer;
 
-        //public Game(bool option)
-        //{
-        //    human = new Player(Resource1.carRed);
-        //    computer = new computerPlayer(Resource1.carBlue);
-        //    Controls.Add(human);
-        //    Controls.Add(computer);
-        //    InitializeComponent();
-        //    computer.turn(Direction.down);
-        //    vComputer = option;
-        //    //computer.turn(Direction.left);//remove later
-        //    //int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
-        //    //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-        //    //button2.Visible = true;
-        //    //button2.Top = height - 10;
-        //    //button2.Left = width / 2;
-        //    //button3.Top = height - 17;
-        //    //button3.Left = width / 2;
-        //    //GameForm.startButton = true;
-            
-                        
-        //}
-
-        public Game(bool option)
+        public Game(bool option, int level = 1)
         {
             human = new Player(Resource1.carRed);
             computer = new computerPlayer(Resource1.carBlue);
@@ -50,24 +28,30 @@ namespace LightningBugs
             InitializeComponent();
             computer.turn(Direction.down);
             vComputer = option;
-            //computer.turn(Direction.left);//remove later
-            //int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
-            //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-            //button2.Visible = true;
-            //button2.Top = height - 10;
-            //button2.Left = width / 2;
-            //button3.Top = height - 17;
-            //button3.Left = width / 2;
-            //GameForm.startButton = true;
 
 
+            moveTimer.Interval = 100;
+            switch (level)
+            {
+                case (0):
+                    moveTimer.Interval -= 40;
+                    break;
+                case (1):
+                    moveTimer.Interval -= 60;
+                    break;
+                case (2):
+                    moveTimer.Interval -= 90;
+                    break;
+                default:
+                    break;
+            }
         }
 
         private void Game_Load(object sender, EventArgs e)
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
-            computer.Top = (int)computer.Width*2;
-            human.Top = ClientRectangle.Height - human.Height - (int)human.Width*2;
+            computer.Top = (int)computer.Width * 2;
+            human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2;
             moveCount = 0;
         }
 
@@ -77,18 +61,7 @@ namespace LightningBugs
 
             if (!gameOver)
             {
-                //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
-                //if (moveTimer.Enabled == false)
-                //{
-                //    moveTimer.Enabled = true;
 
-
-                    //Trying to implement the switch from START to PAUSE button
-                    //Class1 temp = new Class1();
-                    //temp.pauseButtonVisible = true;
-                    
-                //}
-               
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
                 {
@@ -147,7 +120,7 @@ namespace LightningBugs
             if (!gameOver)
             {
                 moveCount++;
-               
+
                 GameImage humanTrail = new GameImage(Resource1.trailRed);
                 human.move(humanTrail);
                 Controls.Add(humanTrail);
@@ -191,18 +164,16 @@ namespace LightningBugs
 
                 KeyValuePair<int, int> pos = human.getFrontPosition();
                 KeyValuePair<int, int> piecePos = image.centerPos();
-                
-                if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height+20 || human.Right >= this.Width+20))
+
+                if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height + 20 || human.Right >= this.Width + 20))
                 {
-                    //MessageBox.Show("You lost");
-                      result = 1;
+                    result = 1;
                 }
 
                 pos = computer.getFrontPosition();
 
-                if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height+20 || computer.Right > this.Width+20))
+                if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height + 20 || computer.Right > this.Width + 20))
                 {
-                    //MessageBox.Show("You lost");
                     result = 2;
                 }
             }

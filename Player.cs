@@ -20,8 +20,8 @@ namespace LightningBugs
         {
             InitializeComponent();
             direction = new DrirectionClass();
-            this.Height = 72;
-            this.Width = 36;
+            this.Height = 54;
+            this.Width = 27;
             this.length = Height;
             this.width = Width;
         }

@@ -69,7 +69,7 @@ namespace LightningBugs
 
             lblLevel.Text = newGameScreen1.comboBox1.SelectedItem.ToString();
 
-            game1 = new Game(newGameScreen1.radioButton1.Checked);
+            game1 = new Game(newGameScreen1.radioButton1.Checked,newGameScreen1.comboBox1.SelectedIndex);
             game1.Top = 10;//put the game in top left corner
             game1.Left = 0;
             game1.Height = height - 60;//expand to be workable size of program

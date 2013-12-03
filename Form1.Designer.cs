@@ -64,7 +64,7 @@
             // 
             // newGameScreen1
             // 
-            this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.newGameScreen1.Location = new System.Drawing.Point(12, 12);
             this.newGameScreen1.Name = "newGameScreen1";
             this.newGameScreen1.Size = new System.Drawing.Size(352, 211);
