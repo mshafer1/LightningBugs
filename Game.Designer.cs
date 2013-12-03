@@ -45,7 +45,6 @@
             this.Name = "Game";
             this.Size = new System.Drawing.Size(863, 534);
             this.Load += new System.EventHandler(this.Game_Load);
-            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Game_KeyPress);
             this.ResumeLayout(false);
 
         }

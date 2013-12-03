@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SelfBalancedTree;
 
 namespace LightningBugs
 {
@@ -20,6 +21,8 @@ namespace LightningBugs
         private bool vComputer;
         public bool gamePaused;
 
+        private AVLTree<GameImage> trails;
+
         public Game(bool option, int level = 1)
         {
             human = new Player(Resource1.carRed);
@@ -31,6 +34,8 @@ namespace LightningBugs
             vComputer = option;
             gamePaused = true; //default to paused
 
+            trails = new AVLTree<GameImage>();
+            
             moveTimer.Interval = 100;
             switch (level)
             {
@@ -52,17 +57,18 @@ namespace LightningBugs
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = (int)computer.Width * 2;
+            //computer.Top = 970;
             human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2;
 
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (gamePaused)
+            if (gamePaused)//game starts paused, this will move from a pause to start on any key
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
-            else if (keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)
+            else if (keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space) // toggle the pause while running on p or spacebar or return
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
@@ -151,6 +157,7 @@ namespace LightningBugs
                 GameImage humanTrail = new GameImage(Resource1.trailRed);
                 human.move(humanTrail);
                 Controls.Add(humanTrail);
+                trails.Add(humanTrail);
 
                 //if (!gameOver)
                 //{
@@ -169,7 +176,7 @@ namespace LightningBugs
                 }
                 computer.move(computerTrail);
                 Controls.Add(computerTrail);
-
+                trails.Add(computerTrail);
 
                 if (!gameOver)
                 {
@@ -197,23 +204,34 @@ namespace LightningBugs
         {
             int result = 0;
 
-            foreach (GameImage image in Controls)
+            //foreach (GameImage image in Controls)
+            //{
+
+            //    KeyValuePair<int, int> pos = human.getFrontPosition();
+            //    KeyValuePair<int, int> piecePos = image.centerPos();
+
+            //    if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height + 20 || human.Right >= this.Width + 20))
+            //    {
+            //        result = 1;
+            //    }
+
+            //    pos = computer.getFrontPosition();
+
+            //    if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height + 20 || computer.Right > this.Width + 20))
+            //    {
+            //        result = 2;
+            //    }
+            //}
+
+
+
+            if (trails.Contains(human) /*|| human.overlap(computer)*/)
             {
-
-                KeyValuePair<int, int> pos = human.getFrontPosition();
-                KeyValuePair<int, int> piecePos = image.centerPos();
-
-                if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height + 20 || human.Right >= this.Width + 20))
-                {
-                    result = 1;
-                }
-
-                pos = computer.getFrontPosition();
-
-                if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height + 20 || computer.Right > this.Width + 20))
-                {
-                    result = 2;
-                }
+                result = 1;
+            }
+            else if (trails.Contains(computer))
+            {
+                result = 2;
             }
             return result;
         }
@@ -250,20 +268,5 @@ namespace LightningBugs
                 handler(this, e);
             }
         }
-
-        private void Game_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            //{
-            //    gamePaused = true;
-            //    PauseGameEvent(new EventArgs());
-            //}
-            //else if (keyData == Keys.Space)
-            //{
-            //    gamePaused = true;
-            //    PauseGameEvent(new EventArgs());
-            //}
-        }
-
-
     }
 }

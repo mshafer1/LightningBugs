@@ -39,7 +39,7 @@ namespace LightningBugs
         private void startGame(object sender, EventArgs e)
         {
             newGameScreen1.Visible = false;
-            int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
+            int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
             int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
             this.WindowState = FormWindowState.Maximized;//maximize the window
             //this.Height = height;//then set the screen size to exactly what we want
@@ -74,7 +74,7 @@ namespace LightningBugs
             game1 = new Game(newGameScreen1.radioButton1.Checked,newGameScreen1.comboBox1.SelectedIndex);
             game1.Top = 10;//put the game in top left corner
             game1.Left = 0;
-            game1.Height = height - 60;//expand to be workable size of program
+            game1.Height = height;//expand to be workable size of program
             game1.Width = width;
             game1.Top = game1.Left = 0;
            

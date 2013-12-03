@@ -50,7 +50,7 @@ namespace LightningBugs
           
             foreach (GameImage image in Controls)
             {
-                if (image != this && (tempPlayer.overlap(image) || tempPlayer.Top <= 2))
+                if (image != this && (tempPlayer.Top <= 2 || tempPlayer.overlap(image)))
                 {
                     options.Remove(Direction.up);
                 }
@@ -58,7 +58,8 @@ namespace LightningBugs
             tempPlayer.turn(Direction.down);
             foreach (GameImage image in Controls)
             {
-                if (image != this && (tempPlayer.overlap(image) || tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 80))
+
+                if (image != this && (tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 500 || tempPlayer.overlap(image)))
                 {
                     options.Remove(Direction.down);
                 }
@@ -66,7 +67,8 @@ namespace LightningBugs
             tempPlayer.turn(Direction.left);
             foreach (GameImage image in Controls)
             {
-                if (image != this && (tempPlayer.overlap(image) || tempPlayer.Left <= -20 || tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 100 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100))
+               
+                if (image != this && ( tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100 || tempPlayer.overlap(image)) )
                 {
                     options.Remove(Direction.left);
                 }
@@ -74,7 +76,7 @@ namespace LightningBugs
             tempPlayer.turn(Direction.right);
             foreach (GameImage image in Controls)
             {
-                if (image != this && (tempPlayer.overlap(image) || tempPlayer.Top <= 0 || tempPlayer.Right > Screen.PrimaryScreen.Bounds.Width))
+                if (image != this && ( tempPlayer.Top <= 0 || tempPlayer.Right > Screen.PrimaryScreen.Bounds.Width || tempPlayer.overlap(image)))
                 {
                     options.Remove(Direction.right);
                 }

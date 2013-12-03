@@ -48,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AvlTree.cs" />
     <Compile Include="computerPlayer.cs">
       <SubType>Component</SubType>
     </Compile>

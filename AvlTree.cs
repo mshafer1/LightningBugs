@@ -238,7 +238,7 @@ namespace SelfBalancedTree
         /// </returns>
         public bool Contains(T arg)
         {
-            bool result = this.Search(this.Root, arg) != null;
+            bool result = Search(this.Root, arg) != null;
             return result;
         }
 
@@ -806,6 +806,7 @@ namespace SelfBalancedTree
         {
             if (subtree != null)
             {
+                
                 if (this.comparer.Compare(data, subtree.Data) < 0)
                 {
                     return this.Search(subtree.Left, data);
