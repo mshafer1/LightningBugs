@@ -16,7 +16,7 @@ namespace LightningBugs
         private static Player human;
         private static computerPlayer computer;
 
-        private static bool gameOver = false;
+        public bool gameOver = false;
         private bool vComputer;
         public bool gamePaused;
 

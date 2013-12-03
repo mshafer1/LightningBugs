@@ -93,19 +93,22 @@ namespace LightningBugs
 
         private void pauseGame(object sender, EventArgs e)
         {
-            game1.gamePaused = !game1.gamePaused;
-            lblInstructions.Visible = !lblInstructions.Visible;
-            if (game1.gamePaused == true)
+            if (!game1.gameOver)
             {
-                game1.moveTimer.Enabled = false;
-                btnToggle.Visible = false;
-                btnContinue.Visible = true;
-            }
-            else
-            {
-                game1.moveTimer.Enabled = true;
-                btnContinue.Visible = false;
-                btnToggle.Visible = true;
+                game1.gamePaused = !game1.gamePaused;
+                lblInstructions.Visible = !lblInstructions.Visible;
+                if (game1.gamePaused == true)
+                {
+                    game1.moveTimer.Enabled = false;
+                    btnToggle.Visible = false;
+                    btnContinue.Visible = true;
+                }
+                else
+                {
+                    game1.moveTimer.Enabled = true;
+                    btnContinue.Visible = false;
+                    btnToggle.Visible = true;
+                }
             }
         }
     }
