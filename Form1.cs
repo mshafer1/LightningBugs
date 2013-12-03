@@ -42,8 +42,8 @@ namespace LightningBugs
             int height = Screen.PrimaryScreen.Bounds.Height - 40;//get the workable height of the screen (-40 for taskbar)
             int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
             this.WindowState = FormWindowState.Maximized;//maximize the window
-            this.Height = height;//then set the screen size to exactly what we want
-            this.Width = width;
+            //this.Height = height;//then set the screen size to exactly what we want
+            //this.Width = width;
 
             lblLevel.Visible = true;
             lblMode.Visible = true;

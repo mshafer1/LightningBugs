@@ -105,6 +105,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.comboBox1);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -112,7 +113,7 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.btnStart);
             this.Name = "NewGameScreen";
-            this.Size = new System.Drawing.Size(343, 220);
+            this.Size = new System.Drawing.Size(339, 216);
             this.ResumeLayout(false);
             this.PerformLayout();
 

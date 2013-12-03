@@ -29,19 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.newGameScreen1 = new LightningBugs.NewGameScreen();
             this.btnToggle = new System.Windows.Forms.Button();
             this.lblMode = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
+            this.newGameScreen1 = new LightningBugs.NewGameScreen();
             this.SuspendLayout();
-            // 
-            // newGameScreen1
-            // 
-            this.newGameScreen1.Location = new System.Drawing.Point(31, 25);
-            this.newGameScreen1.Name = "newGameScreen1";
-            this.newGameScreen1.Size = new System.Drawing.Size(352, 211);
-            this.newGameScreen1.Start = false;
-            this.newGameScreen1.TabIndex = 0;
             // 
             // btnToggle
             // 
@@ -70,11 +62,20 @@
             this.lblLevel.TabIndex = 2;
             this.lblLevel.Text = "label1";
             // 
+            // newGameScreen1
+            // 
+            this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.newGameScreen1.Location = new System.Drawing.Point(12, 12);
+            this.newGameScreen1.Name = "newGameScreen1";
+            this.newGameScreen1.Size = new System.Drawing.Size(352, 211);
+            this.newGameScreen1.Start = false;
+            this.newGameScreen1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(425, 444);
+            this.ClientSize = new System.Drawing.Size(399, 265);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblMode);
             this.Controls.Add(this.btnToggle);
