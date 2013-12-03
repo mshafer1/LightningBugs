@@ -49,6 +49,16 @@ namespace LightningBugs
             lblMode.Visible = true;
             btnToggle.Visible = true;
 
+            if (newGameScreen1.radioButton1.Checked)
+            {
+                lblMode.Text = "Vs. Computer";
+            }
+            else
+            {
+                lblMode.Text = "Two Players";
+            }
+            lblMode.Width = lblMode.Text.Length * 2;
+
             lblLevel.Left = 10;
             lblMode.Left = width - 10 - lblMode.Width;
             btnToggle.Left = (width - btnToggle.Width) / 2;
@@ -58,9 +68,6 @@ namespace LightningBugs
             btnToggle.Top = Height - 100;
 
             lblLevel.Text = newGameScreen1.comboBox1.SelectedItem.ToString();
-
-
-
 
             game1 = new Game(newGameScreen1.radioButton1.Checked);
             game1.Top = 10;//put the game in top left corner
@@ -74,6 +81,7 @@ namespace LightningBugs
 
             Controls.Add(game1);
             game1.Visible = true;
+            game1.Focus();
         }
 
         

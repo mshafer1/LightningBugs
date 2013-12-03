@@ -39,7 +39,7 @@
             // radioButton2
             // 
             this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(267, 90);
+            this.radioButton2.Location = new System.Drawing.Point(230, 70);
             this.radioButton2.Name = "radioButton2";
             this.radioButton2.Size = new System.Drawing.Size(83, 17);
             this.radioButton2.TabIndex = 13;
@@ -50,7 +50,7 @@
             // 
             this.radioButton1.AutoSize = true;
             this.radioButton1.Checked = true;
-            this.radioButton1.Location = new System.Drawing.Point(160, 90);
+            this.radioButton1.Location = new System.Drawing.Point(123, 70);
             this.radioButton1.Name = "radioButton1";
             this.radioButton1.Size = new System.Drawing.Size(85, 17);
             this.radioButton1.TabIndex = 12;
@@ -61,20 +61,19 @@
             // btnStart
             // 
             this.btnStart.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStart.Location = new System.Drawing.Point(165, 150);
+            this.btnStart.Location = new System.Drawing.Point(128, 130);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(80, 30);
             this.btnStart.TabIndex = 11;
             this.btnStart.Text = "START";
             this.btnStart.UseVisualStyleBackColor = true;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
-            
             // 
             // label1
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(75, 80);
+            this.label1.Location = new System.Drawing.Point(38, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(79, 29);
             this.label1.TabIndex = 14;
@@ -84,7 +83,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(75, 109);
+            this.label2.Location = new System.Drawing.Point(38, 89);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(76, 29);
             this.label2.TabIndex = 14;
@@ -97,7 +96,7 @@
             "Easy",
             "Medium",
             "Difficult"});
-            this.comboBox1.Location = new System.Drawing.Point(165, 116);
+            this.comboBox1.Location = new System.Drawing.Point(128, 96);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 21);
             this.comboBox1.TabIndex = 15;
@@ -113,7 +112,7 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.btnStart);
             this.Name = "NewGameScreen";
-            this.Size = new System.Drawing.Size(410, 265);
+            this.Size = new System.Drawing.Size(343, 220);
             this.ResumeLayout(false);
             this.PerformLayout();
 
