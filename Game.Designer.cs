@@ -43,15 +43,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Name = "Game";
-            this.Size = new System.Drawing.Size(863, 592);
+            this.Size = new System.Drawing.Size(863, 534);
             this.Load += new System.EventHandler(this.Game_Load);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Game_KeyPress);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Timer moveTimer;
+        public System.Windows.Forms.Timer moveTimer;
 
 
     }

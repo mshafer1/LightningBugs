@@ -14,7 +14,7 @@ namespace LightningBugs
     public partial class Form1 : Form
     {
         Game game1;
-        //public static bool gamePaused;
+        
         public Form1()
         {
             InitializeComponent();
@@ -25,8 +25,10 @@ namespace LightningBugs
             lblLevel.Visible = false;
             lblMode.Visible = false;
             btnToggle.Visible = false;
-
+            //btnContinue.Click += pauseGame;
+            //btnToggle.Click += pauseGame;
             newGameScreen1.StartGameTime += startGame;
+            
             //newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
             //newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
             
@@ -82,20 +84,29 @@ namespace LightningBugs
             Controls.Add(game1);
             game1.Visible = true;
             game1.Focus();
+            game1.PauseGameEventHandlerVariable += this.pauseGame;
+            lblInstructions.Visible = true;
+            lblInstructions.Text = "Press any key to continue.";
+            lblInstructions.Left = (width - lblInstructions.Width) / 2;
+            //game1.PauseGame += pauseGame;
         }
 
-        private void btnToggle_Click(object sender, EventArgs e)
+        private void pauseGame(object sender, EventArgs e)
         {
-            Game.gamePaused = true;
-            btnToggle.Visible = false;
-            btnContinue.Visible = true;
-        }
-
-        private void btnContinue_Click(object sender, EventArgs e)
-        {
-            Game.gamePaused = false;
-            btnContinue.Visible = false;
-            btnToggle.Visible = true;
+            game1.gamePaused = !game1.gamePaused;
+            lblInstructions.Visible = !lblInstructions.Visible;
+            if (game1.gamePaused == true)
+            {
+                game1.moveTimer.Enabled = false;
+                btnToggle.Visible = false;
+                btnContinue.Visible = true;
+            }
+            else
+            {
+                game1.moveTimer.Enabled = true;
+                btnContinue.Visible = false;
+                btnToggle.Visible = true;
+            }
         }
     }
 }

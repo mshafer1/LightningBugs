@@ -15,10 +15,10 @@ namespace LightningBugs
 
         private static Player human;
         private static computerPlayer computer;
-        private static int moveCount;
+
         private static bool gameOver = false;
         private bool vComputer;
-        public static bool gamePaused;
+        public bool gamePaused;
 
         public Game(bool option, int level = 1)
         {
@@ -29,7 +29,7 @@ namespace LightningBugs
             InitializeComponent();
             computer.turn(Direction.down);
             vComputer = option;
-
+            gamePaused = true; //default to paused
 
             moveTimer.Interval = 100;
             switch (level)
@@ -53,24 +53,26 @@ namespace LightningBugs
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = (int)computer.Width * 2;
             human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2;
-            moveCount = 0;
+
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //pause game
-            //if (keyData == Keys.Space)
-            //{
-            //    gamePaused = true;
-            //}
+            if (gamePaused)
+            {
+                PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
+            }
+            else if (keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)
+            {
+                PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
+            }
+            
 
             if (!gameOver && !gamePaused)
             {
+
                 //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
-                if (moveTimer.Enabled == false)
-                {
-                    moveTimer.Enabled = true;
-                }
+
 
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
@@ -131,6 +133,10 @@ namespace LightningBugs
                     }
 
                 }
+                else
+                {
+
+                }
             }
 
             return true;
@@ -140,7 +146,7 @@ namespace LightningBugs
         {
             if (!gameOver && !gamePaused)
             {
-                moveCount++;
+
 
                 GameImage humanTrail = new GameImage(Resource1.trailRed);
                 human.move(humanTrail);
@@ -211,5 +217,53 @@ namespace LightningBugs
             }
             return result;
         }
+
+        //section for raising the event
+        //private bool pause;
+        public bool Pause
+        {
+            get { return this.gamePaused; }
+            set { this.gamePaused = value; }
+        }
+
+        public event EventHandler PauseGameEventHandlerVariable;
+
+        public void pauseGame(object sender, EventArgs e = null)
+        {
+            //PauseGameEvent(e);
+
+
+        }
+
+        //private void btnStart_MouseLeave(object sender, EventArgs e)
+        //{
+        //    gamePaused = false;
+        //}
+
+        public delegate void PauseGameEventHandler(object sender, EventArgs e);
+
+        public void PauseGameEvent(EventArgs e)
+        {
+            EventHandler handler = PauseGameEventHandlerVariable;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+
+        private void Game_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //{
+            //    gamePaused = true;
+            //    PauseGameEvent(new EventArgs());
+            //}
+            //else if (keyData == Keys.Space)
+            //{
+            //    gamePaused = true;
+            //    PauseGameEvent(new EventArgs());
+            //}
+        }
+
+
     }
 }
