@@ -10,13 +10,14 @@ using System.Windows.Forms;
 
 namespace LightningBugs
 {
+    
     public partial class Form1 : Form
     {
         Game game1;
+        //public static bool gamePaused;
         public Form1()
         {
             InitializeComponent();
-
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -27,13 +28,10 @@ namespace LightningBugs
 
             newGameScreen1.StartGameTime += startGame;
             //newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
-
             //newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
-            //Playing against the computer is the default
-            Text = "Lightning Bugs";//set the display name
-
-            newGameScreen1.Visible = true;
             
+            Text = "Lightning Bugs";//set the display name
+            newGameScreen1.Visible = true;
         }
 
         private void startGame(object sender, EventArgs e)
@@ -51,23 +49,25 @@ namespace LightningBugs
 
             if (newGameScreen1.radioButton1.Checked)
             {
-                lblMode.Text = "Vs. Computer";
+                lblMode.Text = "Mode: Versus Computer";
             }
             else
             {
-                lblMode.Text = "Two Players";
+                lblMode.Text = "Mode: Two Players";
             }
             lblMode.Width = lblMode.Text.Length * 2;
 
             lblLevel.Left = 10;
             lblMode.Left = width - 10 - lblMode.Width;
             btnToggle.Left = (width - btnToggle.Width) / 2;
+            btnContinue.Left = (width - btnContinue.Width) / 2;
 
             lblLevel.Top = Height-100;
             lblMode.Top = Height - 100;
             btnToggle.Top = Height - 100;
+            btnContinue.Top = Height - 100;
 
-            lblLevel.Text = newGameScreen1.comboBox1.SelectedItem.ToString();
+            lblLevel.Text = "Level: " + newGameScreen1.comboBox1.SelectedItem.ToString();
 
             game1 = new Game(newGameScreen1.radioButton1.Checked,newGameScreen1.comboBox1.SelectedIndex);
             game1.Top = 10;//put the game in top left corner
@@ -84,6 +84,18 @@ namespace LightningBugs
             game1.Focus();
         }
 
-        
+        private void btnToggle_Click(object sender, EventArgs e)
+        {
+            Game.gamePaused = true;
+            btnToggle.Visible = false;
+            btnContinue.Visible = true;
+        }
+
+        private void btnContinue_Click(object sender, EventArgs e)
+        {
+            Game.gamePaused = false;
+            btnContinue.Visible = false;
+            btnToggle.Visible = true;
+        }
     }
 }

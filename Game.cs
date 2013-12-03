@@ -18,6 +18,7 @@ namespace LightningBugs
         private static int moveCount;
         private static bool gameOver = false;
         private bool vComputer;
+        public static bool gamePaused;
 
         public Game(bool option, int level = 1)
         {
@@ -57,10 +58,19 @@ namespace LightningBugs
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            //The game can start by pressing space
+            //pause game
+            //if (keyData == Keys.Space)
+            //{
+            //    gamePaused = true;
+            //}
 
-            if (!gameOver)
+            if (!gameOver && !gamePaused)
             {
+                //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
+                if (moveTimer.Enabled == false)
+                {
+                    moveTimer.Enabled = true;
+                }
 
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
@@ -117,7 +127,7 @@ namespace LightningBugs
 
         private void moveTimer_Tick(object sender, EventArgs e)
         {
-            if (!gameOver)
+            if (!gameOver && !gamePaused)
             {
                 moveCount++;
 

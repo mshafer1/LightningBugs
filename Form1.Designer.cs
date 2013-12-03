@@ -32,42 +32,59 @@
             this.btnToggle = new System.Windows.Forms.Button();
             this.lblMode = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
+            this.btnContinue = new System.Windows.Forms.Button();
             this.newGameScreen1 = new LightningBugs.NewGameScreen();
             this.SuspendLayout();
             // 
             // btnToggle
             // 
-            this.btnToggle.Location = new System.Drawing.Point(172, 414);
+            this.btnToggle.Font = new System.Drawing.Font("Kristen ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnToggle.Location = new System.Drawing.Point(90, 306);
             this.btnToggle.Name = "btnToggle";
-            this.btnToggle.Size = new System.Drawing.Size(75, 23);
+            this.btnToggle.Size = new System.Drawing.Size(118, 33);
             this.btnToggle.TabIndex = 1;
-            this.btnToggle.Text = "button1";
+            this.btnToggle.Text = "Pause Game";
             this.btnToggle.UseVisualStyleBackColor = true;
+            this.btnToggle.Click += new System.EventHandler(this.btnToggle_Click);
             // 
             // lblMode
             // 
             this.lblMode.AutoSize = true;
-            this.lblMode.Location = new System.Drawing.Point(12, 414);
+            this.lblMode.Font = new System.Drawing.Font("Kristen ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMode.Location = new System.Drawing.Point(21, 311);
             this.lblMode.Name = "lblMode";
-            this.lblMode.Size = new System.Drawing.Size(35, 13);
+            this.lblMode.Size = new System.Drawing.Size(53, 23);
             this.lblMode.TabIndex = 2;
             this.lblMode.Text = "label1";
             // 
             // lblLevel
             // 
             this.lblLevel.AutoSize = true;
-            this.lblLevel.Location = new System.Drawing.Point(348, 414);
+            this.lblLevel.Font = new System.Drawing.Font("Kristen ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLevel.Location = new System.Drawing.Point(236, 311);
             this.lblLevel.Name = "lblLevel";
-            this.lblLevel.Size = new System.Drawing.Size(35, 13);
+            this.lblLevel.Size = new System.Drawing.Size(53, 23);
             this.lblLevel.TabIndex = 2;
             this.lblLevel.Text = "label1";
+            // 
+            // btnContinue
+            // 
+            this.btnContinue.Font = new System.Drawing.Font("Kristen ITC", 12F);
+            this.btnContinue.Location = new System.Drawing.Point(102, 345);
+            this.btnContinue.Name = "btnContinue";
+            this.btnContinue.Size = new System.Drawing.Size(93, 32);
+            this.btnContinue.TabIndex = 4;
+            this.btnContinue.Text = "Continue";
+            this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.Visible = false;
+            this.btnContinue.Click += new System.EventHandler(this.btnContinue_Click);
             // 
             // newGameScreen1
             // 
             this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.newGameScreen1.Location = new System.Drawing.Point(0, 0);
             this.newGameScreen1.Name = "newGameScreen1";
-            this.newGameScreen1.Size = new System.Drawing.Size(305, 301);
+            this.newGameScreen1.Size = new System.Drawing.Size(305, 300);
             this.newGameScreen1.Start = false;
             this.newGameScreen1.TabIndex = 3;
             // 
@@ -75,12 +92,12 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(299, 295);
+            this.ClientSize = new System.Drawing.Size(294, 294);
+            this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.newGameScreen1);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblMode);
             this.Controls.Add(this.btnToggle);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -99,5 +116,6 @@
         private System.Windows.Forms.Label lblMode;
         private System.Windows.Forms.Label lblLevel;
         private NewGameScreen newGameScreen1;
+        private System.Windows.Forms.Button btnContinue;
     }
 }

@@ -34,7 +34,6 @@
             // 
             // moveTimer
             // 
-            this.moveTimer.Enabled = true;
             this.moveTimer.Interval = 50;
             this.moveTimer.Tick += new System.EventHandler(this.moveTimer_Tick);
             // 
