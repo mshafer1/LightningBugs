@@ -90,9 +90,11 @@ namespace LightningBugs
                     human.turn(Direction.right);
                 }
 
+
+                Direction computer0 = computer.direction.getDirection();
                 if (!vComputer)
                 {
-                    Direction computer0 = computer.direction.getDirection();
+
                     if (keyData == Keys.W)
                     {
                         computer.turn(Direction.up);
@@ -109,16 +111,25 @@ namespace LightningBugs
                     {
                         computer.turn(Direction.right);
                     }
-
                     if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && !gameOver)
                     {
-
                         switch (checkForDeath())
                         {
-                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
-                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Blue WON!"); break;
+                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Red WON!"); break;
                         }
+
                     }
+
+                }
+                else if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && !gameOver)
+                {
+                    switch (checkForDeath())
+                    {
+                        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
+                        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                    }
+
                 }
             }
 
@@ -156,10 +167,21 @@ namespace LightningBugs
 
                 if (!gameOver)
                 {
-                    switch (checkForDeath())
+                    if (!vComputer)
                     {
-                        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
-                        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                        switch (checkForDeath())
+                        {
+                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Blue WON!"); break;
+                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Red WON!"); break;
+                        }
+                    }
+                    else
+                    {
+                        switch (checkForDeath())
+                        {
+                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
+                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
+                        }
                     }
                 }
             }
