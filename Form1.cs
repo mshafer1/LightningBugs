@@ -106,11 +106,11 @@ namespace LightningBugs
         {
             //thought this would remaximize the window once moved - no go.
             this.WindowState = FormWindowState.Maximized;//maximize the window
-            int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
-            int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
+            //int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
+            //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
             
-            this.Height = height;//then set the screen size to exactly what we want
-            this.Width = width;
+            //this.Height = height;//then set the screen size to exactly what we want
+            //this.Width = width;
         }
     }
 }
