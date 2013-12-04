@@ -52,6 +52,8 @@ namespace LightningBugs
                 default:
                     break;
             }
+
+            
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -103,7 +105,6 @@ namespace LightningBugs
                 Direction computer0 = computer.direction.getDirection();
                 if (!vComputer)
                 {
-
                     if (keyData == Keys.W)
                     {
                         computer.turn(Direction.up);
@@ -122,30 +123,14 @@ namespace LightningBugs
                     }
                     if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && !gameOver)
                     {
-                        switch (checkForDeath())
-                        {
-                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Blue WON!"); break;
-                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Red WON!"); break;
-                        }
-
+                        checkForDeath();
                     }
-
                 }
                 else if (human.direction.getDirection() != human0 || computer.direction.getDirection() != computer0 && !gameOver)
                 {
-                    switch (checkForDeath())
-                    {
-                        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
-                        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
-                    }
-
-                }
-                else
-                {
-
+                    checkForDeath();
                 }
             }
-
             return true;
         }
 
@@ -179,27 +164,11 @@ namespace LightningBugs
                 Controls.Add(computerTrail);
                 trails.Add(computerTrail);
 
-                if (!gameOver)
-                {
-                    if (!vComputer)
-                    {
-                        switch (checkForDeath())
-                        {
-                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Blue WON!"); break;
-                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("Red WON!"); break;
-                        }
-                    }
-                    else
-                    {
-                        switch (checkForDeath())
-                        {
-                            case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
-                            case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
-                        }
-                    }
-                }
+                checkForDeath();
             }
         }
+
+        private bool RedWon;
 
         private int checkForDeath()
         {
@@ -228,11 +197,18 @@ namespace LightningBugs
 
             if (trails.Contains(human) || human.overlap(computer))
             {
+                RedWon = false;
                 result = 1;
             }
             else if (trails.Contains(computer))
             {
+                RedWon = true;
                 result = 2;
+            } 
+
+            if (result != 0)
+            {
+                GameOverEventHandler(this, new EventArgs());
             }
             return result;
         }
@@ -283,6 +259,7 @@ namespace LightningBugs
             }
         }
         #endregion
+
         #region starting
         public bool Started
         {
@@ -298,6 +275,7 @@ namespace LightningBugs
             gamePaused = false;
             gameStarted = true;
             moveTimer.Enabled = true;
+            GameOverEventHandler += GameOver;
         }
 
         public delegate void GameStartEventHandlerDelegate(object sender, EventArgs e);
@@ -305,6 +283,58 @@ namespace LightningBugs
         public void StartGameEvent(EventArgs e)
         {
             EventHandler handler = GameStartEventHandler;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+
+        #region Ending
+        public bool gameOverSetandGet
+        {
+            get { return this.gameOver; }
+            set { this.gameOver = value; }
+        }
+
+        public event EventHandler GameOverEventHandler;
+
+        public void GameOver(object sender, EventArgs e = null)
+        {
+
+            //gamePaused = true;
+            
+            moveTimer.Enabled = false;
+            gameOver = true;
+            if (!vComputer)
+            {
+                if (RedWon)
+                {
+                    MessageBox.Show("Red WON!");
+                }
+                else
+                {
+                    MessageBox.Show("Blue WON!");
+                }
+            }
+            else
+            {
+                if (RedWon)
+                {
+                    MessageBox.Show("YOU WON!");
+                }
+                else
+                {
+                    MessageBox.Show("You Lost :(");
+                }
+            }
+        }
+
+        public delegate void GameOverEventHandlerDelegate(object sender, EventArgs e);
+
+        public void GameOverEvent(EventArgs e)
+        {
+            EventHandler handler = GameOverEventHandler;
             if (handler != null)
             {
                 handler(this, e);

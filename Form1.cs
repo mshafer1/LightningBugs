@@ -95,6 +95,8 @@ namespace LightningBugs
             btnToggle.Click += game1.pauseGame;
             btnContinue.Click += game1.pauseGame;
 
+            game1.GameOverEventHandler += this.GameOver;
+
             lblInstructions.Visible = true;
             lblInstructions.Text = "Press any key to continue.";
             lblInstructions.Left = (width - lblInstructions.Width) / 2;
@@ -107,6 +109,16 @@ namespace LightningBugs
                 btnToggle.Visible = !btnToggle.Visible;
                 btnContinue.Visible = !btnContinue.Visible;
                 lblInstructions.Visible = !lblInstructions.Visible;
+                if (btnContinue.Visible)
+                {
+                    LiveTimer.Enabled = false;
+                    pauseTime = DateTime.Now;
+                }
+                else
+                {
+                    pauseTimeElapsed = DateTime.Now-pauseTime;
+                    LiveTimer.Enabled = true;
+                }
             }
         }
 
@@ -130,12 +142,14 @@ namespace LightningBugs
             startTime = DateTime.Now;
         }
 
+        static TimeSpan pauseTimeElapsed;
+        static DateTime pauseTime;
         static DateTime startTime;//
         private void LiveTimer_Tick(object sender, EventArgs e)
         {
             {
                 //DateTime now = new DateTime();
-                TimeSpan elapsedTime = DateTime.Now - startTime;
+                TimeSpan elapsedTime = DateTime.Now - startTime - pauseTimeElapsed;
                 lblTime.Text = "";
                 if (elapsedTime.Minutes.ToString().Length < 2)
                 {
@@ -149,6 +163,11 @@ namespace LightningBugs
                 }
                 lblTime.Text += elapsedTime.Seconds.ToString() + "." + elapsedTime.Milliseconds.ToString().Substring(0,1);
             }
+        }
+
+        private void GameOver(object sender, EventArgs e)
+        {
+            LiveTimer.Enabled = false;
         }
     }
 }

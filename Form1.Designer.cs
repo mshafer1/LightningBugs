@@ -36,8 +36,8 @@
             this.btnContinue = new System.Windows.Forms.Button();
             this.lblInstructions = new System.Windows.Forms.Label();
             this.lblTime = new System.Windows.Forms.Label();
-            this.newGameScreen1 = new LightningBugs.NewGameScreen();
             this.LiveTimer = new System.Windows.Forms.Timer(this.components);
+            this.newGameScreen1 = new LightningBugs.NewGameScreen();
             this.SuspendLayout();
             // 
             // btnToggle
@@ -104,6 +104,10 @@
             this.lblTime.TabIndex = 6;
             this.lblTime.Text = "label1";
             // 
+            // LiveTimer
+            // 
+            this.LiveTimer.Tick += new System.EventHandler(this.LiveTimer_Tick);
+            // 
             // newGameScreen1
             // 
             this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
@@ -113,16 +117,11 @@
             this.newGameScreen1.Start = false;
             this.newGameScreen1.TabIndex = 3;
             // 
-            // LiveTimer
-            // 
-            this.LiveTimer.Interval = 10;
-            this.LiveTimer.Tick += new System.EventHandler(this.LiveTimer_Tick);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(361, 388);
+            this.ClientSize = new System.Drawing.Size(331, 310);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.btnContinue);
