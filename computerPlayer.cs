@@ -67,7 +67,6 @@ namespace LightningBugs
             tempPlayer.turn(Direction.left);
             foreach (GameImage image in Controls)
             {
-               
                 if (image != this && ( tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100 || tempPlayer.overlap(image)) )
                 {
                     options.Remove(Direction.left);
