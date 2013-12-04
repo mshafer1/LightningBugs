@@ -85,6 +85,7 @@ namespace LightningBugs
             game1.Visible = true;
             game1.Focus();
             game1.PauseGameEventHandlerVariable += this.pauseGame;
+            game1.PauseGameEventHandlerVariable += game1.pauseGame;
             lblInstructions.Visible = true;
             lblInstructions.Text = "Press any key to continue.";
             lblInstructions.Left = (width - lblInstructions.Width) / 2;
@@ -95,20 +96,9 @@ namespace LightningBugs
         {
             if (!game1.gameOver)
             {
-                game1.gamePaused = !game1.gamePaused;
+                btnToggle.Visible = !btnToggle.Visible;
+                btnContinue.Visible = !btnContinue.Visible;
                 lblInstructions.Visible = !lblInstructions.Visible;
-                if (game1.gamePaused == true)
-                {
-                    game1.moveTimer.Enabled = false;
-                    btnToggle.Visible = false;
-                    btnContinue.Visible = true;
-                }
-                else
-                {
-                    game1.moveTimer.Enabled = true;
-                    btnContinue.Visible = false;
-                    btnToggle.Visible = true;
-                }
             }
         }
     }

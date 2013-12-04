@@ -225,7 +225,7 @@ namespace LightningBugs
 
 
 
-            if (trails.Contains(human) /*|| human.overlap(computer)*/)
+            if (trails.Contains(human) || human.overlap(computer))
             {
                 result = 1;
             }
@@ -249,7 +249,18 @@ namespace LightningBugs
         public void pauseGame(object sender, EventArgs e = null)
         {
             //PauseGameEvent(e);
+            gamePaused = !gamePaused;
+            
+            if (gamePaused == true)
+            {
+                moveTimer.Enabled = false;
 
+            }
+            else
+            {
+                moveTimer.Enabled = true;
+                
+            }
 
         }
 

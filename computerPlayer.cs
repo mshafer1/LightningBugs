@@ -94,7 +94,7 @@ namespace LightningBugs
                     canContinue = false;
                 }
             }
-            if (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height-10))
+            if (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height-100))
             {
                 canContinue = false;
             }

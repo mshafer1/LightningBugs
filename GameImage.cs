@@ -33,22 +33,26 @@ namespace LightningBugs
         {
             KeyValuePair<int, int> pos = centerPos();
             int myPos = pos.Key + pos.Value;
-            int threshold = p.Width / 4 - 1;
+            int threshold = Width / 4 - 1;
             int result = 0;
 
             int temp = p.centerPos().Key;
             temp = p.centerPos().Value;
             int pPos = p.centerPos().Key + p.centerPos().Value;
 
-            if(!((Left < p.Right+threshold && Right > p.Left-threshold) && (Top < p.Bottom+threshold && Bottom > p.Top-threshold)))
+            if (((Left <= p.Right - threshold && Right >= p.Left + threshold) && (Top <= p.Bottom - threshold && Bottom >= p.Top + threshold)))
             {
-                if (Top < p.Bottom - threshold && Bottom > p.Top + threshold)
+                result = 0;
+            }
+            else
+            {
+                if (myPos > pPos)
                 {
-                    result ++;
+                    result++;
                 }
                 else
                 {
-                    result --;
+                    result--;
                 }
             }
 
