@@ -50,34 +50,27 @@ namespace LightningBugs
             tempPlayer.turn(Direction.up);
             //examine going up
 
-            if (trails.Contains(this) || tempPlayer.Top <= 2)
+            if (trails.Contains(tempPlayer) || tempPlayer.Top <= 2)
             {
                 options.Remove(Direction.up);
             }
-            tempPlayer.turn(Direction.down);
-            foreach (GameImage image in Controls)
-            {
 
-                if (image != this && (tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 500 || tempPlayer.overlap(image)))
-                {
-                    options.Remove(Direction.down);
-                }
+            tempPlayer.turn(Direction.down);
+            if (trails.Contains(tempPlayer) || tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 100)
+            {
+                options.Remove(Direction.down);
             }
+
             tempPlayer.turn(Direction.left);
-            foreach (GameImage image in Controls)
+            if (trails.Contains(tempPlayer) || tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
             {
-                if (image != this && (tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100 || tempPlayer.overlap(image)))
-                {
-                    options.Remove(Direction.left);
-                }
+                options.Remove(Direction.left);
             }
+
             tempPlayer.turn(Direction.right);
-            foreach (GameImage image in Controls)
+            if (trails.Contains(tempPlayer) || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
             {
-                if (image != this && (tempPlayer.Top <= 0 || tempPlayer.Right > Screen.PrimaryScreen.Bounds.Width || tempPlayer.overlap(image)))
-                {
-                    options.Remove(Direction.right);
-                }
+                options.Remove(Direction.right);
             }
 
             tempPlayer.turn(temp);//return orientation to original
@@ -85,14 +78,9 @@ namespace LightningBugs
             ////check to see if can continue in current direction
             tempPlayer.move(new GameImage(Resource1.carBlue));
             bool canContinue = true;
-            foreach (GameImage image in Controls)
-            {
-                if (image != this && tempPlayer.overlap(image))
-                {
-                    canContinue = false;
-                }
-            }
-            if (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100))
+            if (trails.Contains(tempPlayer) || 
+                (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100))
+                )
             {
                 canContinue = false;
             }
