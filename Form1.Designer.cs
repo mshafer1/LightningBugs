@@ -28,13 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.btnToggle = new System.Windows.Forms.Button();
             this.lblMode = new System.Windows.Forms.Label();
             this.lblLevel = new System.Windows.Forms.Label();
             this.btnContinue = new System.Windows.Forms.Button();
             this.lblInstructions = new System.Windows.Forms.Label();
+            this.lblTime = new System.Windows.Forms.Label();
             this.newGameScreen1 = new LightningBugs.NewGameScreen();
+            this.LiveTimer = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
             // btnToggle
@@ -84,12 +87,22 @@
             // 
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblInstructions.Location = new System.Drawing.Point(291, 220);
+            this.lblInstructions.Location = new System.Drawing.Point(201, 353);
             this.lblInstructions.Name = "lblInstructions";
-            this.lblInstructions.Size = new System.Drawing.Size(74, 26);
+            this.lblInstructions.Size = new System.Drawing.Size(162, 26);
             this.lblInstructions.TabIndex = 5;
-            this.lblInstructions.Text = "label1";
+            this.lblInstructions.Text = "lblInstructions";
             this.lblInstructions.Visible = false;
+            // 
+            // lblTime
+            // 
+            this.lblTime.AutoSize = true;
+            this.lblTime.Font = new System.Drawing.Font("Kristen ITC", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTime.Location = new System.Drawing.Point(295, 308);
+            this.lblTime.Name = "lblTime";
+            this.lblTime.Size = new System.Drawing.Size(64, 27);
+            this.lblTime.TabIndex = 6;
+            this.lblTime.Text = "label1";
             // 
             // newGameScreen1
             // 
@@ -100,11 +113,17 @@
             this.newGameScreen1.Start = false;
             this.newGameScreen1.TabIndex = 3;
             // 
+            // LiveTimer
+            // 
+            this.LiveTimer.Interval = 10;
+            this.LiveTimer.Tick += new System.EventHandler(this.LiveTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(361, 388);
+            this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.btnContinue);
             this.Controls.Add(this.newGameScreen1);
@@ -132,5 +151,7 @@
         private NewGameScreen newGameScreen1;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.Label lblInstructions;
+        private System.Windows.Forms.Label lblTime;
+        private System.Windows.Forms.Timer LiveTimer;
     }
 }

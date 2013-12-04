@@ -25,6 +25,7 @@ namespace LightningBugs
             lblLevel.Visible = false;
             lblMode.Visible = false;
             btnToggle.Visible = false;
+            lblTime.Visible = false;
             //btnContinue.Click += pauseGame;
             //btnToggle.Click += pauseGame;
             newGameScreen1.StartGameTime += startGame;
@@ -63,11 +64,13 @@ namespace LightningBugs
             lblMode.Left = width - 10 - lblMode.Width;
             btnToggle.Left = (width - btnToggle.Width) / 2;
             btnContinue.Left = (width - btnContinue.Width) / 2;
+            lblTime.Left = (lblMode.Left - btnToggle.Left) / 2 + btnToggle.Left;
 
             lblLevel.Top = Height-100;
             lblMode.Top = Height - 100;
             btnToggle.Top = Height - 100;
             btnContinue.Top = Height - 100;
+            lblTime.Top = Height - 100;
 
             lblLevel.Text = "Level: " + newGameScreen1.comboBox1.SelectedItem.ToString();
 
@@ -122,6 +125,30 @@ namespace LightningBugs
         {
             btnToggle.Visible = true;
             btnContinue.Visible = false;
+            lblTime.Visible = true;
+            LiveTimer.Enabled = true;
+            startTime = DateTime.Now;
+        }
+
+        static DateTime startTime;//
+        private void LiveTimer_Tick(object sender, EventArgs e)
+        {
+            {
+                //DateTime now = new DateTime();
+                TimeSpan elapsedTime = DateTime.Now - startTime;
+                lblTime.Text = "";
+                if (elapsedTime.Minutes.ToString().Length < 2)
+                {
+                    lblTime.Text = "0";
+                }
+                lblTime.Text += elapsedTime.Minutes.ToString() + ":";
+
+                if (elapsedTime.Seconds.ToString().Length < 2)
+                {
+                    lblTime.Text += "0";
+                }
+                lblTime.Text += elapsedTime.Seconds.ToString() + "." + elapsedTime.Milliseconds.ToString().Substring(0,1);
+            }
         }
     }
 }
