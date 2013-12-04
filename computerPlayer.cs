@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SelfBalancedTree;
 
 namespace LightningBugs
 {
@@ -24,36 +25,34 @@ namespace LightningBugs
             Left = copy.Left;
             direction = copy.direction;
             Width = copy.Right - copy.Left;
-            Height = copy.Bottom- copy.Top;
+            Height = copy.Bottom - copy.Top;
             length = copy.length;
         }
 
-        
+
 
         public void turn(ControlCollection Controls)
         {
-            
+
             List<Direction> options = new List<Direction>();
             Direction temp = direction.getDirection();
-            
-       
-          
+
+
+
             options.Add(Direction.up);//add all possible directions to be removed as they become not options
             options.Add(Direction.down);
             options.Add(Direction.left);
             options.Add(Direction.right);
 
-            
+            AVLTree<GameImage> trails = SingletonTrailTree.getInstance();
+
             computerPlayer tempPlayer = new computerPlayer(this);
             tempPlayer.turn(Direction.up);
             //examine going up
-          
-            foreach (GameImage image in Controls)
+
+            if (trails.Contains(this) || tempPlayer.Top <= 2)
             {
-                if (image != this && (tempPlayer.Top <= 2 || tempPlayer.overlap(image)))
-                {
-                    options.Remove(Direction.up);
-                }
+                options.Remove(Direction.up);
             }
             tempPlayer.turn(Direction.down);
             foreach (GameImage image in Controls)
@@ -67,7 +66,7 @@ namespace LightningBugs
             tempPlayer.turn(Direction.left);
             foreach (GameImage image in Controls)
             {
-                if (image != this && ( tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100 || tempPlayer.overlap(image)) )
+                if (image != this && (tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100 || tempPlayer.overlap(image)))
                 {
                     options.Remove(Direction.left);
                 }
@@ -75,7 +74,7 @@ namespace LightningBugs
             tempPlayer.turn(Direction.right);
             foreach (GameImage image in Controls)
             {
-                if (image != this && ( tempPlayer.Top <= 0 || tempPlayer.Right > Screen.PrimaryScreen.Bounds.Width || tempPlayer.overlap(image)))
+                if (image != this && (tempPlayer.Top <= 0 || tempPlayer.Right > Screen.PrimaryScreen.Bounds.Width || tempPlayer.overlap(image)))
                 {
                     options.Remove(Direction.right);
                 }
@@ -93,7 +92,7 @@ namespace LightningBugs
                     canContinue = false;
                 }
             }
-            if (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height-100))
+            if (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100))
             {
                 canContinue = false;
             }
@@ -110,15 +109,15 @@ namespace LightningBugs
                 options.Remove(temp);
             }
 
-           
+
 
             Random randomChoice = new Random();
-          
+
             if (options.Count > 0)
             {
                 turn(options.ElementAt(randomChoice.Next() % options.Count()));
             }
-           
+
         }
     }
 }

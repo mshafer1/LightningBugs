@@ -34,7 +34,7 @@ namespace LightningBugs
             vComputer = option;
             gamePaused = true; //default to paused
 
-            trails = new AVLTree<GameImage>();
+            trails = SingletonTrailTree.getInstance();
             
             moveTimer.Interval = 100;
             switch (level)

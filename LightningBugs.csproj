@@ -87,6 +87,7 @@
     <Compile Include="Player.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="SingletonTrailTree.cs" />
     <Compile Include="UserControl1.Designer.cs">
       <DependentUpon>Player.cs</DependentUpon>
     </Compile>
