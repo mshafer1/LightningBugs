@@ -47,7 +47,7 @@ namespace LightningBugs
 
             lblLevel.Visible = true;
             lblMode.Visible = true;
-            btnToggle.Visible = true;
+            //btnToggle.Visible = true;
 
             if (newGameScreen1.radioButton1.Checked)
             {
@@ -79,17 +79,22 @@ namespace LightningBugs
             game1.Top = game1.Left = 0;
            
 
-            Text = "Lightning Bugs";//set the display name
+            //Text = "Lightning Bugs";//set the display name
 
             Controls.Add(game1);
             game1.Visible = true;
             game1.Focus();
             game1.PauseGameEventHandlerVariable += this.pauseGame;
             game1.PauseGameEventHandlerVariable += game1.pauseGame;
+            game1.GameStartEventHandler += this.gameStarting;
+            game1.GameStartEventHandler += game1.GameStart;
+
+            btnToggle.Click += game1.pauseGame;
+            btnContinue.Click += game1.pauseGame;
+
             lblInstructions.Visible = true;
             lblInstructions.Text = "Press any key to continue.";
             lblInstructions.Left = (width - lblInstructions.Width) / 2;
-            //game1.PauseGame += pauseGame;
         }
 
         private void pauseGame(object sender, EventArgs e)
@@ -111,6 +116,12 @@ namespace LightningBugs
             
             //this.Height = height;//then set the screen size to exactly what we want
             //this.Width = width;
+        }
+
+        private void gameStarting(object sender, EventArgs e)
+        {
+            btnToggle.Visible = true;
+            btnContinue.Visible = false;
         }
     }
 }

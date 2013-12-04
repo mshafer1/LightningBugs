@@ -19,7 +19,8 @@ namespace LightningBugs
 
         public bool gameOver = false;
         private bool vComputer;
-        public bool gamePaused;
+        private bool gamePaused;
+        private bool gameStarted;
 
         private AVLTree<GameImage> trails;
 
@@ -33,7 +34,7 @@ namespace LightningBugs
             computer.turn(Direction.down);
             vComputer = option;
             gamePaused = true; //default to paused
-
+            gameStarted = false;
             trails = SingletonTrailTree.getInstance();
             
             moveTimer.Interval = 100;
@@ -235,9 +236,9 @@ namespace LightningBugs
             }
             return result;
         }
-
-        //section for raising the event
-        //private bool pause;
+        
+#region section for raising the events
+        #region pause
         public bool Pause
         {
             get { return this.gamePaused; }
@@ -248,26 +249,28 @@ namespace LightningBugs
 
         public void pauseGame(object sender, EventArgs e = null)
         {
-            //PauseGameEvent(e);
-            gamePaused = !gamePaused;
-            
-            if (gamePaused == true)
+            if (gameStarted)
             {
-                moveTimer.Enabled = false;
+                gamePaused = !gamePaused;
 
+                if (gamePaused == true)
+                {
+                    moveTimer.Enabled = false;
+
+                }
+                else
+                {
+                    moveTimer.Enabled = true;
+
+                }
             }
             else
             {
-                moveTimer.Enabled = true;
-                
+                StartGameEvent(e);
             }
 
         }
 
-        //private void btnStart_MouseLeave(object sender, EventArgs e)
-        //{
-        //    gamePaused = false;
-        //}
 
         public delegate void PauseGameEventHandler(object sender, EventArgs e);
 
@@ -279,5 +282,37 @@ namespace LightningBugs
                 handler(this, e);
             }
         }
+        #endregion
+        #region starting
+        public bool Started
+        {
+            get { return this.gamePaused; }
+            set { this.gamePaused = value; }
+        }
+
+        public event EventHandler GameStartEventHandler;
+
+        public void GameStart(object sender, EventArgs e = null)
+        {       
+            
+            gamePaused = false;
+            gameStarted = true;
+            moveTimer.Enabled = true;
+        }
+
+        public delegate void GameStartEventHandlerDelegate(object sender, EventArgs e);
+
+        public void StartGameEvent(EventArgs e)
+        {
+            EventHandler handler = GameStartEventHandler;
+            if (handler != null)
+            {
+                handler(this, e);
+            }
+        }
+        #endregion
+#endregion
     }
+       
+
 }
