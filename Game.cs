@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SelfBalancedTree;
 
+
 namespace LightningBugs
 {
     public partial class Game : UserControl
@@ -20,11 +21,13 @@ namespace LightningBugs
         private bool vComputer;
         private bool gamePaused;
         private bool gameStarted;
+        
 
         private AVLTree<GameImage> trails;
-
+        System.Media.SoundPlayer Player;
         public Game(bool option, int level = 1)
         {
+            
             human = new Player(Resource1.carRed);
             computer = new computerPlayer(Resource1.carBlue);
             Controls.Add(human);
@@ -56,6 +59,8 @@ namespace LightningBugs
                 default:
                     break;
             }
+
+            GameOverEventHandler += GameOver;
         }
 
         private void Game_Load(object sender, EventArgs e)
@@ -248,7 +253,11 @@ namespace LightningBugs
             gamePaused = false;
             gameStarted = true;
             moveTimer.Enabled = true;
-            GameOverEventHandler += GameOver;
+            
+            Player = new System.Media.SoundPlayer();
+            Player.Stream = Resources.Resource1.techno;
+            //Player.Play();
+            Player.PlayLooping();
         }
 
         public delegate void GameStartEventHandlerDelegate(object sender, EventArgs e);
@@ -312,6 +321,7 @@ namespace LightningBugs
             lblMessage.Left = (this.Width - lblMessage.Width) / 2;
             lblMessage.Top = Height / 4;
             lblMessage.Visible = true;
+            Player.Stop();
         }
 
         public delegate void GameOverEventHandlerDelegate(object sender, EventArgs e);
