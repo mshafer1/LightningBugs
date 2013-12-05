@@ -13,8 +13,8 @@ namespace LightningBugs
 {
     public partial class Game : UserControl
     {
-        private   Player human;
-        private   computerPlayer computer;
+        private Player human;
+        private computerPlayer computer;
 
         public bool gameOver = false;
         private bool vComputer;
@@ -40,7 +40,7 @@ namespace LightningBugs
             BlueLived = true;
             gameOver = false;
             Tie = false;
-            
+
             moveTimer.Interval = 100;
             switch (level)
             {
@@ -61,8 +61,8 @@ namespace LightningBugs
         private void Game_Load(object sender, EventArgs e)
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
-            computer.Top = (int)computer.Width * 2 + (human.Width/2);
-            human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2 - (human.Width/2);
+            computer.Top = (int)computer.Width * 2 + (human.Width / 2);
+            human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2 - (human.Width / 2);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
@@ -73,7 +73,7 @@ namespace LightningBugs
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
             //toggle the pause while running on p or spacebar or return
-            else if ((keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)&& !gameOver)
+            else if ((keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space) && !gameOver)
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
@@ -167,7 +167,8 @@ namespace LightningBugs
                 RedLived = false;
                 gameOver = true;
             }
-            else if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
+
+            if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
             {
                 BlueLived = false;
                 gameOver = true;
@@ -279,7 +280,14 @@ namespace LightningBugs
             {
                 if (Tie)
                 {
-                    lblMessage.Text = "Suicide is not permitted";
+                    if (human.overlap(computer))
+                    {
+                        lblMessage.Text = "Suicide is not permitted.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "You two are well Matched!";
+                    }
                 }
                 else if (RedLived && !BlueLived)
                 {
