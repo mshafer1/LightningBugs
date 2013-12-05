@@ -11,9 +11,9 @@ namespace LightningBugs
     {
         static SingletonTrailTree() { }
         
-        public static AVLTree<GameImage> getInstance()
+        public static AVLTree<GameImage> getInstance(bool check = false)
         {
-            if(trails == null)
+            if(trails == null || check)
             {
                 trails = new AVLTree<GameImage>();
             }

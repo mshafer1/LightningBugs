@@ -14,8 +14,8 @@ namespace LightningBugs
     public partial class Game : UserControl
     {
 
-        private static Player human;
-        private static computerPlayer computer;
+        private   Player human;
+        private   computerPlayer computer;
 
         public bool gameOver = false;
         private bool vComputer;
@@ -35,8 +35,14 @@ namespace LightningBugs
             vComputer = option;
             gamePaused = true; //default to paused
             gameStarted = false;
-            trails = SingletonTrailTree.getInstance();
+            trails = SingletonTrailTree.getInstance(true);
+            lblMessage.Visible = false;
+            RedLived = true;
+            BlueLived = true;
+            gameOver = false;
+            Tie = false;
             
+
             moveTimer.Interval = 100;
             switch (level)
             {
@@ -53,35 +59,29 @@ namespace LightningBugs
                     break;
             }
 
-            
+
         }
 
         private void Game_Load(object sender, EventArgs e)
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
             computer.Top = (int)computer.Width * 2;
-            //computer.Top = 970;
             human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2;
-
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (gamePaused)//game starts paused, this will move from a pause to start on any key
+            if (gamePaused && !gameOver)//game starts paused, this will move from a pause to start on any key
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
-            else if (keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space) // toggle the pause while running on p or spacebar or return
+            else if ((keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)&& !gameOver) // toggle the pause while running on p or spacebar or return
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
-            
 
             if (!gameOver && !gamePaused)
             {
-
-                //when game loads, timer is not enabled, this will enable it on first key press making game start on any key.
-
 
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
@@ -100,7 +100,6 @@ namespace LightningBugs
                 {
                     human.turn(Direction.right);
                 }
-
 
                 Direction computer0 = computer.direction.getDirection();
                 if (!vComputer)
@@ -145,15 +144,6 @@ namespace LightningBugs
                 Controls.Add(humanTrail);
                 trails.Add(humanTrail);
 
-                //if (!gameOver)
-                //{
-                //    switch (checkForDeath())
-                //    {
-                //        case (1): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You lost"); break;
-                //        case (2): moveTimer.Enabled = false; gameOver = true; MessageBox.Show("You WIN"); break;
-                //    }
-                //}
-
                 GameImage computerTrail = new GameImage(Resource1.trailBlue);
 
                 if (vComputer)
@@ -168,52 +158,39 @@ namespace LightningBugs
             }
         }
 
-        private bool RedWon;
+        private bool RedLived;
+        private bool BlueLived;
+        private bool Tie;
 
-        private int checkForDeath()
+        private void checkForDeath()
         {
-            int result = 0;
-
-            //foreach (GameImage image in Controls)
-            //{
-
-            //    KeyValuePair<int, int> pos = human.getFrontPosition();
-            //    KeyValuePair<int, int> piecePos = image.centerPos();
-
-            //    if (image != human && human.overlap(image) || (human.Top < -20 || human.Left < -20 || human.Bottom >= this.Height + 20 || human.Right >= this.Width + 20))
-            //    {
-            //        result = 1;
-            //    }
-
-            //    pos = computer.getFrontPosition();
-
-            //    if (image != computer && computer.overlap(image) || (computer.Top < -20 || computer.Left < -20 || computer.Bottom > this.Height + 20 || computer.Right > this.Width + 20))
-            //    {
-            //        result = 2;
-            //    }
-            //}
-
-
-
-            if (trails.Contains(human) || human.overlap(computer))
+            bool gameOver = false;
+            RedLived = true;
+            BlueLived = true;
+            if (trails.Contains(human) || human.overlap(computer) || human.Left < 0 || human.Right > this.Width || human.Top < 0 || human.Bottom > this.Height)
             {
-                RedWon = false;
-                result = 1;
+                RedLived = false;
+                gameOver = true;
             }
-            else if (trails.Contains(computer))
+            else if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
             {
-                RedWon = true;
-                result = 2;
-            } 
+                BlueLived = false;
+                gameOver = true;
+            }
 
-            if (result != 0)
+            if (!vComputer && (human.overlap(computer) || (!RedLived && !BlueLived)))
+            {
+                Tie = true;
+                gameOver = true;
+            }
+
+            if (gameOver)
             {
                 GameOverEventHandler(this, new EventArgs());
             }
-            return result;
         }
-        
-#region section for raising the events
+
+        #region section for raising the events
         #region pause
         public bool Pause
         {
@@ -270,8 +247,8 @@ namespace LightningBugs
         public event EventHandler GameStartEventHandler;
 
         public void GameStart(object sender, EventArgs e = null)
-        {       
-            
+        {
+
             gamePaused = false;
             gameStarted = true;
             moveTimer.Enabled = true;
@@ -301,33 +278,38 @@ namespace LightningBugs
 
         public void GameOver(object sender, EventArgs e = null)
         {
-
-            //gamePaused = true;
-            
             moveTimer.Enabled = false;
+            //gamePaused = true;
             gameOver = true;
+            lblMessage.Left = (this.Width - lblMessage.Width) / 2;
+            lblMessage.Top = Height / 4;
             if (!vComputer)
             {
-                if (RedWon)
+                if (Tie)
                 {
-                    MessageBox.Show("Red WON!");
+                    lblMessage.Text = "Suicide is not permitted";
+                }
+                else if (RedLived && !BlueLived)
+                {
+                    lblMessage.Text = "Red WON!";
                 }
                 else
                 {
-                    MessageBox.Show("Blue WON!");
+                    lblMessage.Text = "Blue WON!";
                 }
             }
             else
             {
-                if (RedWon)
+                if (RedLived && !BlueLived)
                 {
-                    MessageBox.Show("YOU WON!");
+                    lblMessage.Text = "YOU WON! :)";
                 }
                 else
                 {
-                    MessageBox.Show("You Lost :(");
+                    lblMessage.Text = "You Lost :(";
                 }
             }
+            lblMessage.Visible = true;
         }
 
         public delegate void GameOverEventHandlerDelegate(object sender, EventArgs e);
@@ -341,8 +323,8 @@ namespace LightningBugs
             }
         }
         #endregion
-#endregion
+        #endregion
     }
-       
+
 
 }

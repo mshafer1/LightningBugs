@@ -33,7 +33,7 @@ namespace LightningBugs
         {
             KeyValuePair<int, int> pos = centerPos();
             int myPos = pos.Key + pos.Value;
-            int threshold = Width / 4 - 1;
+            int threshold = 6;
             int result = 0;
 
             int temp = p.centerPos().Key;
