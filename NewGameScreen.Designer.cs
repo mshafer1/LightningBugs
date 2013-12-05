@@ -49,6 +49,7 @@
             this.radioButton2.TabIndex = 13;
             this.radioButton2.Text = "Two Players";
             this.radioButton2.UseVisualStyleBackColor = true;
+            this.radioButton2.CheckedChanged += new System.EventHandler(this.SomethingClicked);
             // 
             // radioButton1
             // 
@@ -62,6 +63,7 @@
             this.radioButton1.TabStop = true;
             this.radioButton1.Text = "Vs Computer";
             this.radioButton1.UseVisualStyleBackColor = true;
+            this.radioButton1.CheckedChanged += new System.EventHandler(this.SomethingClicked);
             // 
             // btnStart
             // 
@@ -75,6 +77,7 @@
             this.btnStart.Text = "START";
             this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            this.btnStart.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressEvent);
             // 
             // label1
             // 
@@ -108,6 +111,7 @@
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(121, 24);
             this.comboBox1.TabIndex = 15;
+            this.comboBox1.SelectedIndexChanged += new System.EventHandler(this.SomethingClicked);
             // 
             // pictureBox1
             // 
@@ -147,6 +151,7 @@
             this.Controls.Add(this.btnStart);
             this.Name = "NewGameScreen";
             this.Size = new System.Drawing.Size(295, 301);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.KeyPressEvent);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
