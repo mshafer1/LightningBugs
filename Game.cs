@@ -172,7 +172,7 @@ namespace LightningBugs
                 RedLived = false;
                 gameOver = true;
             }
-            else if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
+            if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
             {
                 BlueLived = false;
                 gameOver = true;
@@ -281,13 +281,20 @@ namespace LightningBugs
             moveTimer.Enabled = false;
             //gamePaused = true;
             gameOver = true;
-            lblMessage.Left = (this.Width - lblMessage.Width) / 2;
+           
             lblMessage.Top = Height / 4;
             if (!vComputer)
             {
                 if (Tie)
                 {
-                    lblMessage.Text = "Suicide is not permitted";
+                    if (human.overlap(computer))
+                    {
+                        lblMessage.Text = "Suicide is not permitted.";
+                    }
+                    else
+                    {
+                        lblMessage.Text = "You two are well Matched!";
+                    }
                 }
                 else if (RedLived && !BlueLived)
                 {
@@ -309,6 +316,7 @@ namespace LightningBugs
                     lblMessage.Text = "You Lost :(";
                 }
             }
+            lblMessage.Left = (this.Width - lblMessage.Width) / 2;
             lblMessage.Visible = true;
         }
 
