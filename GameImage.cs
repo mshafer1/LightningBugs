@@ -15,8 +15,6 @@ namespace LightningBugs
         public GameImage(Image gameImage)
         {
             InitializeComponent();
-            
-
             Image =  gameImage;
             Size = new System.Drawing.Size(gameImage.Width, gameImage.Height);
             SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -29,7 +27,8 @@ namespace LightningBugs
             return result;
         }
 
-        public int CompareTo(GameImage p)//this function is necessary for == or < or > comparisons, it returns 0 for =, -1 for less than, and 1 for greater than
+        //this function is necessary for == or < or > comparisons, it returns 0 for =, -1 for less than, and 1 for greater than
+        public int CompareTo(GameImage p)
         {
             KeyValuePair<int, int> pos = centerPos();
             int myPos = pos.Key + pos.Value;
@@ -55,8 +54,6 @@ namespace LightningBugs
                     result--;
                 }
             }
-
-
             return result;
         }
     }

@@ -29,17 +29,13 @@ namespace LightningBugs
             length = copy.length;
         }
 
-
-
         public void turn(ControlCollection Controls)
         {
-
             List<Direction> options = new List<Direction>();
             Direction temp = direction.getDirection();
 
-
-
-            options.Add(Direction.up);//add all possible directions to be removed as they become not options
+            //add all possible directions to be removed as they become not options
+            options.Add(Direction.up);
             options.Add(Direction.down);
             options.Add(Direction.left);
             options.Add(Direction.right);
@@ -47,9 +43,8 @@ namespace LightningBugs
             AVLTree<GameImage> trails = SingletonTrailTree.getInstance();
 
             computerPlayer tempPlayer = new computerPlayer(this);
+            
             tempPlayer.turn(Direction.up);
-            //examine going up
-
             if (trails.Contains(tempPlayer) || tempPlayer.Top <= 2)
             {
                 options.Remove(Direction.up);
@@ -73,14 +68,16 @@ namespace LightningBugs
                 options.Remove(Direction.right);
             }
 
-            tempPlayer.turn(temp);//return orientation to original
+            //return orientation to original
+            tempPlayer.turn(temp);
 
-            ////check to see if can continue in current direction
+            //check to see if can continue in current direction
             tempPlayer.move(new GameImage(Resource1.carBlue));
             bool canContinue = true;
             if (trails.Contains(tempPlayer) || 
-                (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100))
-                )
+                (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 
+                && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width 
+                && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100)))
             {
                 canContinue = false;
             }
@@ -97,15 +94,11 @@ namespace LightningBugs
                 options.Remove(temp);
             }
 
-
-
             Random randomChoice = new Random();
-
             if (options.Count > 0)
             {
                 turn(options.ElementAt(randomChoice.Next() % options.Count()));
             }
-
         }
     }
 }

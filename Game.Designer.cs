@@ -41,11 +41,11 @@
             // lblMessage
             // 
             this.lblMessage.AutoSize = true;
-            this.lblMessage.BackColor = System.Drawing.SystemColors.Control;
-            this.lblMessage.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Bold);
-            this.lblMessage.Location = new System.Drawing.Point(235, 165);
+            this.lblMessage.BackColor = System.Drawing.Color.Transparent;
+            this.lblMessage.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMessage.Location = new System.Drawing.Point(243, 144);
             this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(126, 26);
+            this.lblMessage.Size = new System.Drawing.Size(142, 28);
             this.lblMessage.TabIndex = 0;
             this.lblMessage.Text = "lblMessage";
             // 
@@ -53,10 +53,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Transparent;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.lblMessage);
             this.Name = "Game";
-            this.Size = new System.Drawing.Size(863, 534);
+            this.Size = new System.Drawing.Size(629, 322);
             this.Load += new System.EventHandler(this.Game_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

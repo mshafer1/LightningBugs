@@ -17,6 +17,7 @@ namespace LightningBugs
             InitializeComponent();
             comboBox1.SelectedIndex = 0;
         }
+
         private bool start;
         public bool Start
         {

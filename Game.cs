@@ -13,7 +13,6 @@ namespace LightningBugs
 {
     public partial class Game : UserControl
     {
-
         private   Player human;
         private   computerPlayer computer;
 
@@ -42,7 +41,6 @@ namespace LightningBugs
             gameOver = false;
             Tie = false;
             
-
             moveTimer.Interval = 100;
             switch (level)
             {
@@ -58,31 +56,30 @@ namespace LightningBugs
                 default:
                     break;
             }
-
-
         }
 
         private void Game_Load(object sender, EventArgs e)
         {
             computer.Left = human.Left = ClientRectangle.Width / 2 - human.Width / 2;
-            computer.Top = (int)computer.Width * 2;
-            human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2;
+            computer.Top = (int)computer.Width * 2 + (human.Width/2);
+            human.Top = ClientRectangle.Height - human.Height - (int)human.Width * 2 - (human.Width/2);
         }
 
         protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (gamePaused && !gameOver)//game starts paused, this will move from a pause to start on any key
+            //game starts paused, this will move from a pause to start on any key
+            if (gamePaused && !gameOver)
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
-            else if ((keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)&& !gameOver) // toggle the pause while running on p or spacebar or return
+            //toggle the pause while running on p or spacebar or return
+            else if ((keyData == Keys.Enter || keyData == Keys.P || keyData == Keys.Space)&& !gameOver)
             {
                 PauseGameEvent(new KeyPressEventArgs(keyData.ToString()[0]));
             }
 
             if (!gameOver && !gamePaused)
             {
-
                 Direction human0 = human.direction.getDirection();
                 if (keyData == Keys.Up)
                 {
@@ -137,8 +134,6 @@ namespace LightningBugs
         {
             if (!gameOver && !gamePaused)
             {
-
-
                 GameImage humanTrail = new GameImage(Resource1.trailRed);
                 human.move(humanTrail);
                 Controls.Add(humanTrail);
@@ -172,7 +167,7 @@ namespace LightningBugs
                 RedLived = false;
                 gameOver = true;
             }
-            if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
+            else if (trails.Contains(computer) || computer.Left < 0 || computer.Right > this.Width || computer.Top < 0 || computer.Bottom > this.Height)
             {
                 BlueLived = false;
                 gameOver = true;
@@ -279,22 +274,12 @@ namespace LightningBugs
         public void GameOver(object sender, EventArgs e = null)
         {
             moveTimer.Enabled = false;
-            //gamePaused = true;
             gameOver = true;
-           
-            lblMessage.Top = Height / 4;
             if (!vComputer)
             {
                 if (Tie)
                 {
-                    if (human.overlap(computer))
-                    {
-                        lblMessage.Text = "Suicide is not permitted.";
-                    }
-                    else
-                    {
-                        lblMessage.Text = "You two are well Matched!";
-                    }
+                    lblMessage.Text = "Suicide is not permitted";
                 }
                 else if (RedLived && !BlueLived)
                 {
@@ -317,6 +302,7 @@ namespace LightningBugs
                 }
             }
             lblMessage.Left = (this.Width - lblMessage.Width) / 2;
+            lblMessage.Top = Height / 4;
             lblMessage.Visible = true;
         }
 
@@ -333,6 +319,4 @@ namespace LightningBugs
         #endregion
         #endregion
     }
-
-
 }

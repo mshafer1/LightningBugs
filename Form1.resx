@@ -160,7 +160,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblMode.Location" type="System.Drawing.Point, System.Drawing">
-    <value>21, 311</value>
+    <value>10, 311</value>
   </data>
   <data name="lblMode.Size" type="System.Drawing.Size, System.Drawing">
     <value>74, 23</value>
@@ -193,7 +193,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblLevel.Location" type="System.Drawing.Point, System.Drawing">
-    <value>236, 311</value>
+    <value>214, 311</value>
   </data>
   <data name="lblLevel.Size" type="System.Drawing.Size, System.Drawing">
     <value>71, 23</value>
@@ -247,22 +247,22 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnContinue.ZOrder" xml:space="preserve">
-    <value>3</value>
+    <value>4</value>
   </data>
   <data name="lblInstructions.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
   <data name="lblInstructions.Font" type="System.Drawing.Font, System.Drawing">
-    <value>Times New Roman, 18pt, style=Bold</value>
+    <value>Consolas, 18pt</value>
   </data>
   <data name="lblInstructions.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
     <value>NoControl</value>
   </data>
   <data name="lblInstructions.Location" type="System.Drawing.Point, System.Drawing">
-    <value>201, 353</value>
+    <value>45, 429</value>
   </data>
   <data name="lblInstructions.Size" type="System.Drawing.Size, System.Drawing">
-    <value>162, 26</value>
+    <value>207, 28</value>
   </data>
   <data name="lblInstructions.TabIndex" type="System.Int32, mscorlib">
     <value>5</value>
@@ -286,7 +286,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblInstructions.ZOrder" xml:space="preserve">
-    <value>2</value>
+    <value>3</value>
   </data>
   <data name="lblTime.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
@@ -298,7 +298,7 @@
     <value>NoControl</value>
   </data>
   <data name="lblTime.Location" type="System.Drawing.Point, System.Drawing">
-    <value>313, 312</value>
+    <value>106, 466</value>
   </data>
   <data name="lblTime.Size" type="System.Drawing.Size, System.Drawing">
     <value>79, 27</value>
@@ -319,7 +319,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;lblTime.ZOrder" xml:space="preserve">
-    <value>1</value>
+    <value>2</value>
   </data>
   <metadata name="LiveTimer.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>17, 17</value>
@@ -331,7 +331,7 @@
     <value>NoControl</value>
   </data>
   <data name="btnNewGame.Location" type="System.Drawing.Point, System.Drawing">
-    <value>90, 394</value>
+    <value>90, 383</value>
   </data>
   <data name="btnNewGame.Size" type="System.Drawing.Size, System.Drawing">
     <value>118, 32</value>
@@ -355,16 +355,16 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;btnNewGame.ZOrder" xml:space="preserve">
-    <value>0</value>
+    <value>1</value>
   </data>
   <data name="newGameScreen1.Location" type="System.Drawing.Point, System.Drawing">
-    <value>-2, 0</value>
+    <value>0, 0</value>
   </data>
   <data name="newGameScreen1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>305, 300</value>
+    <value>299, 301</value>
   </data>
   <data name="newGameScreen1.TabIndex" type="System.Int32, mscorlib">
-    <value>3</value>
+    <value>8</value>
   </data>
   <data name="&gt;&gt;newGameScreen1.Name" xml:space="preserve">
     <value>newGameScreen1</value>
@@ -376,7 +376,7 @@
     <value>$this</value>
   </data>
   <data name="&gt;&gt;newGameScreen1.ZOrder" xml:space="preserve">
-    <value>4</value>
+    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -385,7 +385,7 @@
     <value>6, 13</value>
   </data>
   <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
-    <value>295, 297</value>
+    <value>298, 304</value>
   </data>
   <data name="$this.Icon" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>

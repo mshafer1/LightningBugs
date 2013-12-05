@@ -10,11 +10,10 @@ using System.Windows.Forms;
 
 namespace LightningBugs
 {
-    
     public partial class Form1 : Form
     {
         Game game1;
-        
+
         public Form1()
         {
             InitializeComponent();
@@ -30,16 +29,17 @@ namespace LightningBugs
         private void createNewGame()
         {
             creatingANewGame = true;
-            int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
-            int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-            //this.WindowState = FormWindowState.Maximized;//maximize the window
+            //get the workable height of the screen (-100 for taskbar)
+            int height = Screen.PrimaryScreen.Bounds.Height - 100;
+            //get workable width of screen
+            int width = Screen.PrimaryScreen.Bounds.Width;
+
             this.Height = 336;
-            this.Width = 311;
-            Top = (height-Height)/2;
-            Left = (width-Width)/2;
+            this.Width = 312;
+            Top = (height - Height) / 2;
+            Left = (width - Width) / 2;
             creatingANewGame = true;
-            //this.WindowState = FormWindowState.Normal;//maximize the window
-            
+
             lblLevel.Visible = false;
             lblMode.Visible = false;
             btnToggle.Visible = false;
@@ -50,37 +50,30 @@ namespace LightningBugs
             {
                 game1.Visible = false;
             }
-            //btnContinue.Click += pauseGame;
-            //btnToggle.Click += pauseGame;
 
-
-
-            //newGameScreen1.Left = (this.Width - newGameScreen1.Width) / 2;
-            //newGameScreen1.Top = (this.Height - newGameScreen1.Height) / 2;
-
-            Text = "Lightning Bugs";//set the display name
+            //set the display name
+            Text = "Lightning Bugs";
             newGameScreen1.Visible = true;
-
+            newGameScreen1.Focus();
         }
 
         private void startGame(object sender, EventArgs e)
         {
             creatingANewGame = false;
-            
+
             newGameScreen1.Visible = false;
-            int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
-            int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-            //this.WindowState = FormWindowState.Maximized;//maximize the window
-            this.Height = height;//then set the screen size to exactly what we want
+            //get the workable height of the screen (-40 for taskbar)
+            int height = Screen.PrimaryScreen.Bounds.Height - 100;
+            //get workable width of screen
+            int width = Screen.PrimaryScreen.Bounds.Width;
+            //then set the screen size to exactly what we want
+            this.Height = height;
             this.Width = width;
             Top = 0;
             Left = 0;
-
-
+            
             lblLevel.Visible = true;
             lblMode.Visible = true;
-            
-            //btnToggle.Visible = true;
 
             if (newGameScreen1.radioButton1.Checked)
             {
@@ -90,14 +83,15 @@ namespace LightningBugs
             {
                 lblMode.Text = "Mode: Two Players";
             }
+            lblLevel.Text = "Level: " + newGameScreen1.comboBox1.SelectedItem.ToString();
+
             lblMode.Width = lblMode.Text.Length * 2;
-
-
+            
             lblLevel.Left = 10;
-            lblMode.Left = Width - 10 - lblMode.Width;
+            lblMode.Left = Width - 20 - lblMode.Width;
             btnToggle.Left = (Width - btnToggle.Width) / 2;
             btnContinue.Left = (Width - btnContinue.Width) / 2;
-            lblTime.Left = (lblMode.Left - btnToggle.Left) / 2 + btnToggle.Left;
+            lblTime.Left = (lblLevel.Right + lblLevel.Text.Length);
             btnNewGame.Left = (Width - btnNewGame.Width) / 2;
 
             lblLevel.Top = Height - 100;
@@ -107,18 +101,14 @@ namespace LightningBugs
             lblTime.Top = Height - 100;
             btnNewGame.Top = Height - 100;
 
-
-            lblLevel.Text = "Level: " + newGameScreen1.comboBox1.SelectedItem.ToString();
-
-            game1 = new Game(newGameScreen1.radioButton1.Checked,newGameScreen1.comboBox1.SelectedIndex);
-            game1.Top = 10;//put the game in top left corner
+            game1 = new Game(newGameScreen1.radioButton1.Checked, newGameScreen1.comboBox1.SelectedIndex);
+            //put the game in top left corner
+            game1.Top = 10;
             game1.Left = 0;
-            game1.Height = height;//expand to be workable size of program
+            //expand to be workable size of program
+            game1.Height = height;
             game1.Width = width;
             game1.Top = game1.Left = 0;
-           
-
-            //Text = "Lightning Bugs";//set the display name
 
             Controls.Add(game1);
             game1.Visible = true;
@@ -134,7 +124,7 @@ namespace LightningBugs
             game1.GameOverEventHandler += this.GameOver;
 
             lblInstructions.Visible = true;
-            lblInstructions.Text = "Press any key to start.\nYou can use Space bar, Return or \"p\" to pause the game.";
+            lblInstructions.Text = "Press any key to start.\n\nYou can use Space bar, Return or \"p\" to pause the game.";
             lblInstructions.Left = (width - lblInstructions.Width) / 2;
             lblInstructions.Top = Height / 4;
         }
@@ -155,7 +145,7 @@ namespace LightningBugs
                 }
                 else
                 {
-                    pauseTimeElapsed = DateTime.Now-pauseTime;
+                    pauseTimeElapsed = DateTime.Now - pauseTime;
                     LiveTimer.Enabled = true;
                 }
             }
@@ -163,25 +153,18 @@ namespace LightningBugs
 
         private void Form1_Move(object sender, EventArgs e)
         {
-            //thought this would remaximize the window once moved - no go.
-            
-            if(!creatingANewGame)
+            if (!creatingANewGame)
             {
-                int height = Screen.PrimaryScreen.Bounds.Height;//get the workable height of the screen (-40 for taskbar)
-                int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-                //this.WindowState = FormWindowState.Maximized;//maximize the window
-                this.Height = height;//then set the screen size to exactly what we want
+                //get the workable height of the screen (-40 for taskbar)
+                int height = Screen.PrimaryScreen.Bounds.Height;
+                //get workable width of screen
+                int width = Screen.PrimaryScreen.Bounds.Width;
+                //then set the screen size to exactly what we want
+                this.Height = height;
                 this.Width = width;
                 Top = 0;
                 Left = 0;
             }
-            //int height = Screen.PrimaryScreen.Bounds.Height - 100;//get the workable height of the screen (-40 for taskbar)
-            //int width = Screen.PrimaryScreen.Bounds.Width;//get workable width of screen
-
-            //this.Height = height;//then set the screen size to exactly what we want
-            //this.Width = width;
-            //Top = 0;
-            //Left = 0;
         }
 
         private void gameStarting(object sender, EventArgs e)
@@ -199,20 +182,19 @@ namespace LightningBugs
 
         private void LiveTimer_Tick(object sender, EventArgs e)
         {
-                //DateTime now = new DateTime();
-                TimeSpan elapsedTime = DateTime.Now - startTime - pauseTimeElapsed;
-                lblTime.Text = "";
-                if (elapsedTime.Minutes.ToString().Length < 2)
-                {
-                    lblTime.Text = "0";
-                }
-                lblTime.Text += elapsedTime.Minutes.ToString() + ":";
+            TimeSpan elapsedTime = DateTime.Now - startTime - pauseTimeElapsed;
+            lblTime.Text = "";
+            if (elapsedTime.Minutes.ToString().Length < 2)
+            {
+                lblTime.Text = "0";
+            }
+            lblTime.Text += elapsedTime.Minutes.ToString() + ":";
 
-                if (elapsedTime.Seconds.ToString().Length < 2)
-                {
-                    lblTime.Text += "0";
-                }
-                lblTime.Text += elapsedTime.Seconds.ToString() + "." + elapsedTime.Milliseconds.ToString().Substring(0,1);
+            if (elapsedTime.Seconds.ToString().Length < 2)
+            {
+                lblTime.Text += "0";
+            }
+            lblTime.Text += elapsedTime.Seconds.ToString() + "." + elapsedTime.Milliseconds.ToString().Substring(0, 1);
         }
 
         private void GameOver(object sender, EventArgs e)
@@ -220,10 +202,11 @@ namespace LightningBugs
             LiveTimer.Enabled = false;
             btnToggle.Visible = false;
             btnNewGame.Visible = true;
-            btnNewGame.Focus();
-            lblInstructions.Text = "Good game!\nPress New Game for more fun or just exit (don't... please!).";
+            
+            lblInstructions.Text = "\nGood game!\nPress New Game for more fun or just exit (don't... please!).";
             lblInstructions.Left = (Width - lblInstructions.Width) / 2;
             lblInstructions.Visible = true;
+            btnNewGame.Focus();
         }
 
         private void btnNewGame_Click(object sender, EventArgs e)

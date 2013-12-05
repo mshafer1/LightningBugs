@@ -40,8 +40,6 @@ namespace LightningBugs
         {
             int result = (int)((float)((input / 2 + .5)));
             return result;
-            
-
         }
 
         public virtual void turn(Direction d)
@@ -86,9 +84,6 @@ namespace LightningBugs
                         Top += abs(this.Height - this.Width) - 1;
                         break;
                 }
-
-
-
                 direction.decrement();
             }
         }
@@ -101,8 +96,10 @@ namespace LightningBugs
             trail.Width = 4;
             if (this.direction.getDirection() == Direction.up)
             {
-                trail.Top = (int)(this.Top + Height - moveLength);//Height - moveLength is position from front of car that trail should end before car is moved
-                trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);//by dividing the diference of the widths by two, we get half of the margin to put on one side.
+                //Height - moveLength is position from front of car that trail should end before car is moved
+                trail.Top = (int)(this.Top + Height - moveLength);
+                //by dividing the diference of the widths by two, we get half of the margin to put on one side.
+                trail.Left = (int)(this.Left + (float)(this.Width - trail.Width) / 2);
 
                 this.Top -= (int)(moveLength);
             }
@@ -115,22 +112,24 @@ namespace LightningBugs
             }
             else
             {
-                trail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);//orient the trail horizontally.
+                //orient the trail horizontally.
+                trail.Image.RotateFlip(RotateFlipType.Rotate90FlipXY);
+
                 int temp = trail.Width;
                 trail.Width = trail.Height;
                 trail.Height = temp;
 
-                trail.Top = (this.Top + (this.Height - trail.Height) / 2);//position trail in center of car vertically.
+                //position trail in center of car vertically.
+                trail.Top = (this.Top + (this.Height - trail.Height) / 2);
+
                 if ((this.direction.getDirection() == Direction.left))
                 {
                     trail.Left = this.Left + this.Width - moveLength;
-
                     this.Left -= (int)(moveLength);
                 }
                 else
                 {
                     trail.Left = this.Left;
-
                     this.Left += (int)(moveLength);
                 }
             }
@@ -139,23 +138,26 @@ namespace LightningBugs
         public KeyValuePair<int, int> getPosition()
         {
             KeyValuePair<int, int> result = new KeyValuePair<int, int>(Left + (Width / 2), Top + (Height / 2));
-
             return result;
         }
 
         public KeyValuePair<int, int> getTrunkPosition()
         {
-            int trunkx = Left + Width / 2; // assuming up, horizontal center
-            int trunky = Top + Height; //vertical bottom
+            //assuming up, horizontal center
+            int trunkx = Left + Width / 2;
+            //vertical bottom
+            int trunky = Top + Height; 
 
             switch (direction.getDirection())
             {
                 case (Direction.up): break;
+                //if headed down; however, move vertical to top
                 case (Direction.down):
-                    trunky = Top; //if headed down; however, move vertical to top
+                    trunky = Top;
                     break;
-                case (Direction.left):
-                    trunky = (int)(Top + (float)Height / 2); //if moving horizontally, totally redo
+                //if moving horizontally, totally redo
+                case (Direction.left): 
+                    trunky = (int)(Top + (float)Height / 2); 
                     trunkx = Left + Width;
                     break;
                 case (Direction.right):
@@ -163,8 +165,10 @@ namespace LightningBugs
                     trunkx = Left;
                     break;
             }
-            KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);//create a pair of int using determined x and y
-            return result;//return this pair
+            //create a pair of int using determined x and y
+            KeyValuePair<int, int> result = new KeyValuePair<int, int>(trunkx, trunky);
+            //return this pair
+            return result;
         }
 
         public KeyValuePair<int, int> getFrontPosition()

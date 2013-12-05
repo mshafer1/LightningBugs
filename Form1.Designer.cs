@@ -43,9 +43,10 @@
             // 
             // btnToggle
             // 
+            this.btnToggle.BackColor = System.Drawing.Color.SeaShell;
             resources.ApplyResources(this.btnToggle, "btnToggle");
             this.btnToggle.Name = "btnToggle";
-            this.btnToggle.UseVisualStyleBackColor = true;
+            this.btnToggle.UseVisualStyleBackColor = false;
             this.btnToggle.Click += new System.EventHandler(this.pauseGame);
             // 
             // lblMode
@@ -60,9 +61,10 @@
             // 
             // btnContinue
             // 
+            this.btnContinue.BackColor = System.Drawing.Color.SeaShell;
             resources.ApplyResources(this.btnContinue, "btnContinue");
             this.btnContinue.Name = "btnContinue";
-            this.btnContinue.UseVisualStyleBackColor = true;
+            this.btnContinue.UseVisualStyleBackColor = false;
             this.btnContinue.Click += new System.EventHandler(this.pauseGame);
             // 
             // lblInstructions
@@ -81,13 +83,15 @@
             // 
             // btnNewGame
             // 
+            this.btnNewGame.BackColor = System.Drawing.Color.SeaShell;
             resources.ApplyResources(this.btnNewGame, "btnNewGame");
             this.btnNewGame.Name = "btnNewGame";
-            this.btnNewGame.UseVisualStyleBackColor = true;
+            this.btnNewGame.UseVisualStyleBackColor = false;
             this.btnNewGame.Click += new System.EventHandler(this.btnNewGame_Click);
             // 
             // newGameScreen1
             // 
+            this.newGameScreen1.BackColor = System.Drawing.Color.Azure;
             this.newGameScreen1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             resources.ApplyResources(this.newGameScreen1, "newGameScreen1");
             this.newGameScreen1.Name = "newGameScreen1";
@@ -97,11 +101,12 @@
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Lavender;
+            this.Controls.Add(this.newGameScreen1);
             this.Controls.Add(this.btnNewGame);
             this.Controls.Add(this.lblTime);
             this.Controls.Add(this.lblInstructions);
             this.Controls.Add(this.btnContinue);
-            this.Controls.Add(this.newGameScreen1);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.lblMode);
             this.Controls.Add(this.btnToggle);
@@ -121,11 +126,11 @@
         private System.Windows.Forms.Button btnToggle;
         private System.Windows.Forms.Label lblMode;
         private System.Windows.Forms.Label lblLevel;
-        private NewGameScreen newGameScreen1;
         private System.Windows.Forms.Button btnContinue;
         private System.Windows.Forms.Label lblInstructions;
         private System.Windows.Forms.Label lblTime;
         private System.Windows.Forms.Timer LiveTimer;
         private System.Windows.Forms.Button btnNewGame;
+        private NewGameScreen newGameScreen1;
     }
 }

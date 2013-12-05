@@ -65,13 +65,15 @@
             // 
             // btnStart
             // 
+            this.btnStart.BackColor = System.Drawing.Color.SeaShell;
             this.btnStart.Font = new System.Drawing.Font("Kristen ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStart.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnStart.Location = new System.Drawing.Point(99, 239);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(101, 38);
             this.btnStart.TabIndex = 11;
             this.btnStart.Text = "START";
-            this.btnStart.UseVisualStyleBackColor = true;
+            this.btnStart.UseVisualStyleBackColor = false;
             this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
             // 
             // label1
@@ -113,7 +115,7 @@
             this.pictureBox1.Image = global::LightningBugs.Resource1.crash;
             this.pictureBox1.Location = new System.Drawing.Point(-2, -2);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(297, 105);
+            this.pictureBox1.Size = new System.Drawing.Size(299, 105);
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
@@ -121,6 +123,7 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Kristen ITC", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.DarkOrange;
             this.label3.Location = new System.Drawing.Point(65, 111);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(166, 36);
@@ -132,6 +135,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Azure;
             this.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.Controls.Add(this.label3);
             this.Controls.Add(this.pictureBox1);
@@ -142,7 +146,7 @@
             this.Controls.Add(this.radioButton1);
             this.Controls.Add(this.btnStart);
             this.Name = "NewGameScreen";
-            this.Size = new System.Drawing.Size(292, 301);
+            this.Size = new System.Drawing.Size(295, 301);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -153,11 +157,11 @@
 
         public System.Windows.Forms.RadioButton radioButton2;
         public System.Windows.Forms.RadioButton radioButton1;
-        public System.Windows.Forms.Button btnStart;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         public System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label3;
+        public System.Windows.Forms.Button btnStart;
     }
 }
