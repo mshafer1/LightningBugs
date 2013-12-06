@@ -149,6 +149,7 @@ namespace LightningBugs
                 if (vComputer)
                 {
                     computer.turn(Controls);
+                    checkForDeath();
                 }
                 computer.move(computerTrail);
                 Controls.Add(computerTrail);
@@ -333,6 +334,7 @@ namespace LightningBugs
             {
                 handler(this, e);
             }
+            Player.Stop();
         }
         #endregion
         #endregion

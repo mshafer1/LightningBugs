@@ -27,77 +27,86 @@ namespace LightningBugs
             Width = copy.Right - copy.Left;
             Height = copy.Bottom - copy.Top;
             length = copy.length;
+            
         }
+
+
 
         public void turn(ControlCollection Controls)
         {
-            List<Direction> options = new List<Direction>();
-            Direction temp = direction.getDirection();
-
-            //add all possible directions to be removed as they become not options
-            options.Add(Direction.up);
-            options.Add(Direction.down);
-            options.Add(Direction.left);
-            options.Add(Direction.right);
-
-            AVLTree<GameImage> trails = SingletonTrailTree.getInstance();
-
-            computerPlayer tempPlayer = new computerPlayer(this);
-            
-            tempPlayer.turn(Direction.up);
-            if (trails.Contains(tempPlayer) || tempPlayer.Top <= 2)
+            if ((moveCount + 1) % 2 == 1)
             {
-                options.Remove(Direction.up);
-            }
+                List<Direction> options = new List<Direction>();
+                Direction temp = direction.getDirection();
 
-            tempPlayer.turn(Direction.down);
-            if (trails.Contains(tempPlayer) || tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 100)
-            {
-                options.Remove(Direction.down);
-            }
+                //add all possible directions to be removed as they become not options
+                options.Add(Direction.up);
+                options.Add(Direction.down);
+                options.Add(Direction.left);
+                options.Add(Direction.right);
 
-            tempPlayer.turn(Direction.left);
-            if (trails.Contains(tempPlayer) || tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
-            {
-                options.Remove(Direction.left);
-            }
+                AVLTree<GameImage> trails = SingletonTrailTree.getInstance();
 
-            tempPlayer.turn(Direction.right);
-            if (trails.Contains(tempPlayer) || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
-            {
-                options.Remove(Direction.right);
-            }
+                computerPlayer tempPlayer = new computerPlayer(this);
 
-            //return orientation to original
-            tempPlayer.turn(temp);
-
-            //check to see if can continue in current direction
-            tempPlayer.move(new GameImage(Resource1.carBlue));
-            bool canContinue = true;
-            if (trails.Contains(tempPlayer) || 
-                (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 
-                && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width 
-                && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100)))
-            {
-                canContinue = false;
-            }
-            if (canContinue)
-            {
-                int optionCount = 40;
-                for (int i = 0; i < optionCount; i++)
+                tempPlayer.turn(Direction.up);
+                if (trails.Contains(tempPlayer) || tempPlayer.Top <= 2)
                 {
-                    options.Add(direction.getDirection());
+                    options.Remove(Direction.up);
                 }
-            }
-            else
-            {
-                options.Remove(temp);
-            }
 
-            Random randomChoice = new Random();
-            if (options.Count > 0)
-            {
-                turn(options.ElementAt(randomChoice.Next() % options.Count()));
+                tempPlayer.turn(Direction.down);
+                if (trails.Contains(tempPlayer) || tempPlayer.Bottom >= Screen.PrimaryScreen.Bounds.Height - 100)
+                {
+                    options.Remove(Direction.down);
+                }
+
+                tempPlayer.turn(Direction.left);
+                if (trails.Contains(tempPlayer) || tempPlayer.Left <= -20 || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
+                {
+                    options.Remove(Direction.left);
+                }
+
+                tempPlayer.turn(Direction.right);
+                if (trails.Contains(tempPlayer) || tempPlayer.Top <= -10 || tempPlayer.Right >= Screen.PrimaryScreen.Bounds.Width - 100)
+                {
+                    options.Remove(Direction.right);
+                }
+
+                //return orientation to original
+                tempPlayer.turn(temp);
+
+                //check to see if can continue in current direction
+                tempPlayer.move(new GameImage(Resource1.carBlue));
+                bool canContinue = true;
+                if (trails.Contains(tempPlayer) ||
+                    !
+                    (tempPlayer.Top > 2 && tempPlayer.Left > 2
+                    && tempPlayer.Right < Screen.PrimaryScreen.Bounds.Width
+                    && tempPlayer.Bottom < Screen.PrimaryScreen.Bounds.Height - 100)
+                    )
+                {
+                    canContinue = false;
+                }
+
+                if (canContinue)
+                {
+                    int optionCount = 40;
+                    for (int i = 0; i < optionCount; i++)
+                    {
+                        options.Add(direction.getDirection());
+                    }
+                }
+                else
+                {
+                    options.Remove(temp);
+                }
+
+                Random randomChoice = new Random();
+                if (options.Count > 0)
+                {
+                    turn(options.ElementAt(randomChoice.Next() % options.Count()));
+                }
             }
         }
     }
