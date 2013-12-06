@@ -13,9 +13,17 @@ namespace LightningBugs
         
         public static AVLTree<GameImage> getInstance(bool check = false)
         {
-            if(trails == null || check)
+            if(trails == null)
             {
                 trails = new AVLTree<GameImage>();
+                
+            }
+            else if (check)
+            {
+                if (trails != null)
+                {
+                    trails.Clear();
+                }
             }
             return trails;
         }

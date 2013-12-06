@@ -15,6 +15,7 @@ namespace LightningBugs
         protected int length;
         int width;
         public DrirectionClass direction;
+        protected int moveCount;
         public Player(Image image)
             : base(image)
         {
@@ -24,6 +25,7 @@ namespace LightningBugs
             this.Width = 27;
             this.length = Height;
             this.width = Width;
+            moveCount = 0;
         }
 
         private int ceil(float input)
@@ -91,7 +93,7 @@ namespace LightningBugs
         public void move(GameImage trail)
         {
             int moveLength = 5;
-
+            moveCount++;
             trail.Height = moveLength;
             trail.Width = 4;
             if (this.direction.getDirection() == Direction.up)
