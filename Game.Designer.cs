@@ -43,7 +43,7 @@
             this.lblMessage.AutoSize = true;
             this.lblMessage.BackColor = System.Drawing.Color.Transparent;
             this.lblMessage.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblMessage.Location = new System.Drawing.Point(243, 144);
+            this.lblMessage.Location = new System.Drawing.Point(194, 57);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(142, 28);
             this.lblMessage.TabIndex = 0;
