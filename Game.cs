@@ -24,7 +24,7 @@ namespace LightningBugs
         
 
         private AVLTree<GameImage> trails;
-        System.Media.SoundPlayer Player;
+       
         public Game(bool option, int level = 1)
         {
             
@@ -255,10 +255,7 @@ namespace LightningBugs
             gameStarted = true;
             moveTimer.Enabled = true;
             
-            Player = new System.Media.SoundPlayer();
-            Player.Stream = Resources.Resource1.techno;
-            //Player.Play();
-            Player.PlayLooping();
+            
         }
 
         public delegate void GameStartEventHandlerDelegate(object sender, EventArgs e);
@@ -322,7 +319,7 @@ namespace LightningBugs
             lblMessage.Left = (this.Width - lblMessage.Width) / 2;
             lblMessage.Top = Height / 4;
             lblMessage.Visible = true;
-            Player.Stop();
+            
         }
 
         public delegate void GameOverEventHandlerDelegate(object sender, EventArgs e);
@@ -334,7 +331,7 @@ namespace LightningBugs
             {
                 handler(this, e);
             }
-            Player.Stop();
+           
         }
         #endregion
         #endregion

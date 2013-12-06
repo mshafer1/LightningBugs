@@ -162,8 +162,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon %281%29.ico" />
-    <Content Include="Resources\techno.wav" />
-    <Content Include="techno.wav" />
     <None Include="Resources\crash.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
