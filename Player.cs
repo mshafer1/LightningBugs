@@ -88,9 +88,9 @@ namespace LightningBugs
             }
         }
 
-        public void move(GameImage trail, int moveLength = 5)
+        public void move(GameImage trail)
         {
-            this.moveLength = moveLength;
+            int moveLength = 5;
 
             trail.Height = moveLength;
             trail.Width = 4;
@@ -216,7 +216,5 @@ namespace LightningBugs
             }
             return result;
         }
-
-        protected int moveLength;
-        }
+    }
 }

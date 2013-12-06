@@ -72,7 +72,7 @@ namespace LightningBugs
             tempPlayer.turn(temp);
 
             //check to see if can continue in current direction
-            tempPlayer.move(new GameImage(Resource1.carBlue),moveLength);
+            tempPlayer.move(new GameImage(Resource1.carBlue));
             bool canContinue = true;
             if (trails.Contains(tempPlayer) || 
                 (!(tempPlayer.Top > 2 && tempPlayer.Left > 2 
