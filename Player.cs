@@ -16,6 +16,7 @@ namespace LightningBugs
         int width;
         public DrirectionClass direction;
         protected int moveCount;
+        protected int moveLength;
         public Player(Image image)
             : base(image)
         {
@@ -90,9 +91,14 @@ namespace LightningBugs
             }
         }
 
-        public void move(GameImage trail)
+        public void move(GameImage trail, int moveLength = 0)
         {
-            int moveLength = 5;
+            if (moveLength == 0)
+            {
+                moveLength = this.moveLength;
+            }
+            this.moveLength = moveLength;
+            //int moveLength = 5;
             moveCount++;
             trail.Height = moveLength;
             trail.Width = 4;

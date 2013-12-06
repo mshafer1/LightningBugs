@@ -27,14 +27,13 @@ namespace LightningBugs
             Width = copy.Right - copy.Left;
             Height = copy.Bottom - copy.Top;
             length = copy.length;
-            
         }
 
 
 
         public void turn(ControlCollection Controls)
         {
-            if ((moveCount + 1) % 2 == 1)
+            //if ((moveCount + 1) % 2 == 1)
             {
                 List<Direction> options = new List<Direction>();
                 Direction temp = direction.getDirection();
@@ -77,7 +76,7 @@ namespace LightningBugs
                 tempPlayer.turn(temp);
 
                 //check to see if can continue in current direction
-                tempPlayer.move(new GameImage(Resource1.carBlue));
+                tempPlayer.move(new GameImage(Resource1.carBlue),this.moveLength);
                 bool canContinue = true;
                 if (trails.Contains(tempPlayer) ||
                     !
@@ -107,6 +106,8 @@ namespace LightningBugs
                 {
                     turn(options.ElementAt(randomChoice.Next() % options.Count()));
                 }
+
+                options.Clear();
             }
         }
     }

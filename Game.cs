@@ -21,7 +21,7 @@ namespace LightningBugs
         private bool vComputer;
         private bool gamePaused;
         private bool gameStarted;
-        
+        private int moveLength;
 
         private AVLTree<GameImage> trails;
         System.Media.SoundPlayer Player;
@@ -44,17 +44,17 @@ namespace LightningBugs
             gameOver = false;
             Tie = false;
 
-            moveTimer.Interval = 100;
+            moveTimer.Interval = 60;
             switch (level)
             {
                 case (0):
-                    moveTimer.Interval -= 40;
+                    moveLength = 5;
                     break;
                 case (1):
-                    moveTimer.Interval -= 60;
+                    moveLength = 10;
                     break;
                 case (2):
-                    moveTimer.Interval -= 90;
+                    moveLength = 20;
                     break;
                 default:
                     break;
@@ -140,7 +140,7 @@ namespace LightningBugs
             if (!gameOver && !gamePaused)
             {
                 GameImage humanTrail = new GameImage(Resource1.trailRed);
-                human.move(humanTrail);
+                human.move(humanTrail,moveLength);
                 Controls.Add(humanTrail);
                 trails.Add(humanTrail);
 
@@ -151,7 +151,7 @@ namespace LightningBugs
                     computer.turn(Controls);
                     checkForDeath();
                 }
-                computer.move(computerTrail);
+                computer.move(computerTrail,moveLength);
                 Controls.Add(computerTrail);
                 trails.Add(computerTrail);
 
